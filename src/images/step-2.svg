@@ -1,0 +1,13 @@
+<svg width="71" height="67" viewBox="0 0 71 67" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2 1)" fill="none" fill-rule="evenodd">
+        <path d="M35.709 53h-2.832c-10.378-.015-18.79-8.32-18.803-18.571-.007-6.097 4.25-10.746 4.418-18.85C18.492 6.974 25.553 0 34.264 0s15.773 6.975 15.773 15.578c.228 8.259 4.476 12.598 4.417 18.851C54.44 44.657 46.064 52.954 35.71 53z" stroke="#000" stroke-width="1.5"/>
+        <circle fill="#FFE253" fill-rule="nonzero" opacity=".6" cx="33.743" cy="15.807" r="5"/>
+        <text font-family="K2D-Medium, K2D Medium" font-size="18" fill="#000">
+                        <tspan x="28.341" y="26">2</tspan>
+                    </text>
+        <text font-family="K2D-Medium, K2D Medium" font-size="12" fill="#000">
+                        <tspan x="23.341" y="41">step</tspan>
+                    </text>
+        <path d="M25.781 53c-.615 1.582-1.247 3.513-1.898 5.792-.65 2.28-.018 4.211 1.898 5.793M.341 25c3.488-5.129 6.518-8.026 9.09-8.693 2.573-.667 5.377-.927 8.411-.782M65.615 29.807c-2.373-.497-5.016-1.599-7.929-3.307-2.913-1.708-5.411-5.752-7.496-12.131M40.781 53c-1.848 1.582-3.097 3.513-3.747 5.792-.65 2.28.14 4.211 2.373 5.793" stroke="#000" stroke-width="2" stroke-linecap="square"/>
+    </g>
+</svg>
