@@ -1,14 +1,21 @@
 const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const templates = [
+    { template: './src/about_us.html', filename: './index.html'},
+    { template: './src/careers.html', filename: './careers.html'},
+    { template: './src/vacancy.html', filename: './vacancy.html'},
+];
+
 
 module.exports = {
     entry: {
         main: "./src/index.js",
     },
     output: {
-        filename: "[name].js",
+        filename: "[name].[contenthash].js",
         path: path.resolve(__dirname, 'dist'),
     },
     module: {
@@ -45,10 +52,7 @@ module.exports = {
                 { from: "./src/images/", to: "./images/" },
             ],
         }),
-        new MiniCssExtractPlugin({filename: "[name].css"})
+        new MiniCssExtractPlugin({filename: "[name].css"}),
+        ...templates.map(template => new HtmlWebpackPlugin(template)),
     ],
 }
-
-plugins: [
-    new MiniCssExtractPlugin({filename: "[name].css"})
-]
