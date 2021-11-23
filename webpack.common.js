@@ -3,6 +3,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const templates = [
     { template: './src/about_us.html', filename: './index.html'},
     { template: './src/careers.html', filename: './careers.html'},
@@ -23,20 +24,15 @@ module.exports = {
             {
                 test: /\.scss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    "sass-loader"
+                    { loader: MiniCssExtractPlugin.loader, options: { publicPath: "."} },
+                    { loader: 'css-loader', options: { sourceMap: true } },
+                    { loader: 'resolve-url-loader', options: { sourceMap: true } },
+                    { loader: 'sass-loader', options: { sourceMap: true } },
                 ],
             },
             {
                 test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
-                use: {
-                    loader: "file-loader",
-                    options: {
-                        name: "[name].[ext]",
-                        outputPath: "images",
-                    }
-                }
+                type: "asset",
             },
             {
                 test: /\.js$/,
