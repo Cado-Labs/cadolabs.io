@@ -23,6 +23,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.1",
     "node-sass": "^6.0.1",
+    "resolve-url-loader": "^4.0.0",
     "style-loader": "^3.3.1"
   }
 }
