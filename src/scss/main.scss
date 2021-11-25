@@ -89,44 +89,24 @@ h2 {
   font: 500 36px/47px $k2d;
 }
 
-
-
-header {
-  padding-top: 40px;
-  .wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  @media all and (max-width: 1023px) {
-    .wrapper {
-      align-items: flex-start;
-    }
-    nav ul {
-      flex-wrap: wrap;
-    }
-  }
-}
-
 nav {
   ul {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     li {
-      a {
+      a, span {
         color: #000;
         font: 300 21px/75px $k2d;
         text-decoration: none;
+      }
+      a {
         &:hover {
-          text-decoration: underline;
-        }
-        &.active {
           text-decoration: underline;
         }
       }
       footer & {
-        a {
+        a, span {
           line-height: 24px;
         }
       }
@@ -136,6 +116,157 @@ nav {
     }
   }
 }
+
+header {
+  padding-top: 40px;
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav {
+    position: relative;
+    &:after {
+      display: block;
+      position: absolute;
+      content: '';
+      width: 74px;
+      height: 100px;
+      background: url("../images/cado-man.svg") no-repeat 50% 50%;
+      background-size: 100% 100%;
+      top: 74px;
+      left: 179px;
+    }
+    &:before {
+      display: block;
+      content: '';
+      position: absolute;
+      top: -71px;
+      left: 12px;
+      height: 62px;
+      transform: rotate(-3.8deg);
+      width: 3000px;
+      background: $green;
+      z-index: -1;
+    }
+    .menu-toggler {
+      display: none;
+      background: url("../images/burger-off.svg") no-repeat 50% 50%;
+      width: 33px;
+      height: 29px;
+    }
+    ul {
+      li {
+        padding: 0 24px;
+        + li {
+          margin-left: 0;
+        }
+        &.active {
+          position: relative;
+          &:before {
+            display: block;
+            content: '';
+            position: absolute;
+            right: 0;
+            left: 0;
+            height: 66px;
+            transform: rotate(-3.8deg);
+            background: #fff;
+            z-index: -1;
+          }
+        }
+        @for $i from 1 through 5 {
+          &:nth-child(#{$i}) {
+            &.active {
+              &:before {
+                top: 22px - 9px*($i - 1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 1023px) {
+    nav {
+      &:after {
+        height: 60px;
+        width: 47px;
+        top: 32px;
+        left: -7px;
+      }
+      &:before {
+        top: -34px;
+        left: -34px;
+        height: 62px;
+        transform: rotate(-10deg);
+        width: 150px;
+      }
+      .menu-toggler {
+        cursor: pointer;
+        display: block;
+        margin-top: -11px;
+      }
+      ul {
+        display: none;
+        li {
+          padding: 0;
+          &.active {
+            &:before {
+              display: none;
+            }
+          }
+          > * {
+            position: relative;
+            &:hover {
+              text-decoration: none;
+
+            }
+          }
+          &.active > *,
+          > *:hover {
+            &:after {
+              position: absolute;
+              display: block;
+              content: '';
+              bottom: -8px;
+              height: 3px;
+              background: #000;
+              right: 0;
+              left: 0;
+            }
+          }
+          width: 50%;
+          &:first-child {
+            width: 100%;
+          }
+        }
+      }
+      &.active {
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          background: #c9f6e9;
+          position: absolute;
+          right: -40px;
+          top: 91px;
+          width: 100vw;
+          padding: 20px 40px 20px 55px;
+        }
+      }
+    }
+  }
+  @media all and (max-width: 359px) {
+    nav {
+      &.active {
+        ul {
+          padding: 20px 15px;
+        }
+      }
+    }
+  }
+}
+
 section {
   ul {
     li {
@@ -221,7 +352,7 @@ section {
     margin-top: 40px;
   }
   @media all and (max-width: 1347px) {
-    margin: 66px 0 218px;
+    margin: 100px 0 218px;
     h1 {
       width: 100%;
       font-size: 24px;
@@ -233,6 +364,9 @@ section {
       width: calc(100% - 300px);
     }
   }
+  @media all and (max-width: 1023px) {
+    margin: 66px 0 218px;
+  }
   @media all and (max-width: 767px) {
     margin-bottom: 270px;
     p {
@@ -240,6 +374,228 @@ section {
     }
   }
 
+}
+.about-career {
+  margin: 72px 0 100px;
+  h1 {
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  p {
+    b {
+      font-weight: 500;
+    }
+  }
+  .cado-has-denies {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 40px;
+    grid-gap: 0 20px;
+    > div {
+      width: 50%;
+      position: relative;
+      .title {
+        font: 500 24px/28px $k2d;
+        margin-bottom: 27px;
+      }
+      &:before {
+        position: absolute;
+        display: block;
+        content: '';
+        left: -20px;
+        width: 12px;
+        height: 12px;
+        top: 8px;
+      }
+      &:nth-child(1) {
+        &:before {
+          background: url("../images/has.svg") no-repeat 50% 50%;
+          background-size: contain;
+        }
+        ul {
+          li {
+            b {
+              font-weight: 500;
+            }
+            a {
+              margin-left: 5px;
+              font-weight: 500;
+              color: #2e3255;
+            }
+            &:last-child {
+              margin-top: 16px;
+              &:before {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+      &:nth-child(2) {
+        &:before {
+          background: url("../images/denies.svg") no-repeat 50% 50%;
+          background-size: contain;
+        }
+      }
+      ul {
+        li {
+          position: relative;
+          display: flex;
+          align-items: flex-start;
+          &:before {
+            content: '';
+            position: relative;
+            margin-top: 13px;
+            display: block;
+            width: 4px;
+            height: 3px;
+            background: #000;
+            border-radius: 50%;
+            margin-right: 7px;
+          }
+          + li {
+            margin-top: 1px;
+          }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 767px) {
+    margin: 50px 0 78px;
+    .cado-has-denies {
+      flex-direction: column;
+      grid-gap: 40px 0;
+      align-items: center;
+      > div {
+        width: auto;
+      }
+    }
+  }
+}
+.become-one-of-us {
+  .wrapper {
+    margin-bottom: 98px;
+  }
+  h2 {
+    line-height: 60px;
+    margin-bottom: 50px;
+    span {
+      background: #ffe253;
+    }
+  }
+  ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    grid-gap: 90px 20px;
+    li {
+      display: flex;
+      width: 25%;
+      align-items: center;
+      justify-content: flex-start;
+      img {
+        width: 69px;
+        height: 79px;
+        display: block;
+        object-fit: contain;
+        object-position: 50% 50%;
+      }
+      .title {
+        font: 500 21px/27px $k2d;
+        margin-bottom: 1px;
+      }
+    }
+  }
+  .get-offer {
+    position: relative;
+    margin-top: 17px;
+    &:before {
+      display: block;
+      content: '';
+      background: url("../images/line.svg") no-repeat 50% 50%;
+      background-size: cover;
+      height: 33px;
+      width: 100%;
+      margin-bottom: 215px;
+    }
+    &:after {
+      display: block;
+      content: '';
+      background: url("../images/step-5.svg") no-repeat 50% 50%;
+      background-size: 100% 100%;
+      width: 66px;
+      height: 208px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      top: 24px;
+    }
+    .title {
+      font: 500 36px/47px $k2d;
+      text-align: center;
+    }
+    .descr {
+      text-align: center;
+    }
+  }
+  @media all and (max-width: 1279px) {
+    h2 {
+      font-size: 30px;
+      line-height: 40px;
+      padding: 10px;
+      position: relative;
+      background: #ffe253;
+      display: inline-block;
+      span {
+        background: none;
+      }
+      &:before {
+        content: '';
+        background: #ffe253;
+        display: block;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        right: 100%;
+        width: 50px;
+      }
+    }
+    ul {
+      flex-wrap: wrap;
+      grid-gap: 90px 0;
+      position: relative;
+      &:before {
+        display: block;
+        content: '';
+        background: url("../images/line.svg") no-repeat 0 50%;
+        background-size: cover;
+        height: 33px;
+        width: 100%;
+        position: absolute;
+        top: calc(50% - 15px);
+        left: 0;
+        right: 0;
+      }
+      li {
+        width: 50%;
+      }
+    }
+  }
+  @media all and (max-width: 639px) {
+    ul {
+      grid-gap: 30px 0;
+      flex-direction: column;
+      align-items: center;
+      &:before {
+        display: none;
+      }
+      li {
+        width: auto;
+      }
+    }
+  }
 }
 .cado-looking-for {
   position: relative;
@@ -588,6 +944,17 @@ footer {
     justify-content: flex-end;
     align-items: center;
   }
+  nav {
+    ul {
+      li {
+        &.active {
+          * {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
   @media all and (max-width: 1347px) {
     nav {
       ul {
@@ -605,6 +972,3 @@ footer {
   }
 }
 
-@media all and (max-width: 1347px) {}
-@media all and (max-width: 767px) {}
-@media all and (max-width: 639px) {}
