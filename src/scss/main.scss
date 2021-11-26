@@ -157,16 +157,18 @@ header {
   }
   nav {
     position: relative;
-    &:after {
-      display: block;
-      position: absolute;
-      content: '';
-      width: 74px;
-      height: 100px;
-      background: url("../images/cado-man.svg") no-repeat 50% 50%;
-      background-size: 100% 100%;
-      top: 74px;
-      left: 179px;
+    &.decorated {
+      &:after {
+        display: block;
+        position: absolute;
+        content: '';
+        width: 74px;
+        height: 100px;
+        background: url("../images/cado-man.svg") no-repeat 50% 50%;
+        background-size: 100% 100%;
+        top: 74px;
+        left: 179px;
+      }
     }
     &:before {
       display: block;
@@ -194,6 +196,20 @@ header {
         }
         &.active {
           position: relative;
+          > span,
+          > a {
+            position: relative;
+            &:after {
+              height: 3px;
+              bottom: -7px;
+              display: block;
+              content: '';
+              right: 0;
+              left: 0;
+              position: absolute;
+              background: #000;
+            }
+          }
           &:before {
             display: block;
             content: '';
@@ -220,11 +236,13 @@ header {
   }
   @media all and (max-width: 1023px) {
     nav {
-      &:after {
-        height: 60px;
-        width: 47px;
-        top: 32px;
-        left: -7px;
+      &.decorated {
+        &:after {
+          height: 60px;
+          width: 47px;
+          top: 32px;
+          left: -7px;
+        }
       }
       &:before {
         top: -34px;
@@ -373,7 +391,7 @@ section {
   }
 }
 .about-us {
-  margin: 100px 0 106px;
+  margin: 90px 0 106px;
   h1 {
     width: 890px;
   }
@@ -383,7 +401,7 @@ section {
     margin-top: 40px;
   }
   @media all and (max-width: 1347px) {
-    margin: 100px 0 218px;
+    margin: 90px 0 218px;
     h1 {
       width: 100%;
       font-size: 24px;
