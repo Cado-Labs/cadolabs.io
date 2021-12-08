@@ -8,6 +8,7 @@ const templates = [
     { template: './src/about_us.html', filename: './index.html'},
     { template: './src/careers.html', filename: './careers.html'},
     { template: './src/vacancy.html', filename: './vacancy.html'},
+    { template: './src/contact.html', filename: './contact.html'},
 ];
 
 
