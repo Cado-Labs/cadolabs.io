@@ -1289,8 +1289,14 @@ footer {
   padding-bottom: 80px;
   .wrapper {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+  }
+  .adress {
+    max-width: 360px;
+    width: 100%;
+    font: 700 18px/23px $jura;
+    color: #000;
   }
   nav {
     ul {
@@ -1308,7 +1314,18 @@ footer {
       ul {
         flex-wrap: wrap;
         grid-gap: 30px 20px;
+        li {
+          + li {
+            margin-left: 0;
+          }
+        }
       }
+    }
+  }
+  @media all and (max-width: 1279px) {
+    .wrapper {
+      flex-direction: column-reverse;
+      grid-gap: 50px;
     }
   }
   @media all and (max-width: 639px) {
