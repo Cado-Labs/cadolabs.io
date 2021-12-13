@@ -1318,6 +1318,12 @@ section {
     margin: 50px 0 78px;
   }
 }
+.tech-radar {
+  margin: 72px 0 100px;
+  @media all and (max-width: 767px) {
+    margin: 50px 0 78px;
+  }
+}
 footer {
   padding-bottom: 80px;
   .wrapper {

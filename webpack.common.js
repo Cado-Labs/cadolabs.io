@@ -11,6 +11,7 @@ const templates = [
     { template: './src/contact.html', filename: './contact.html'},
     { template: './src/privacy.html', filename: './privacy.html'},
     { template: './src/cookie-policy.html', filename: './cookie-policy.html'},
+    { template: './src/tech-radar.html', filename: './tech-radar.html'},
 ];
 
 
