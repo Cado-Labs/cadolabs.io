@@ -9,6 +9,8 @@ const templates = [
     { template: './src/careers.html', filename: './careers.html'},
     { template: './src/vacancy.html', filename: './vacancy.html'},
     { template: './src/contact.html', filename: './contact.html'},
+    { template: './src/privacy.html', filename: './privacy.html'},
+    { template: './src/cookie-policy.html', filename: './cookie-policy.html'},
 ];
 
 

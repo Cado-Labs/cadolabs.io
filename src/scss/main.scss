@@ -1285,6 +1285,39 @@ section {
     }
   }
 }
+.content {
+  margin: 72px 0 100px;
+  h1 {
+    margin-bottom: 40px;
+    font-weight: 600;
+  }
+  .text {
+    p, h3, ul {
+      + p, + ul, + blockquote {
+        margin-top: 15px;
+      }
+      + h3 {
+        margin-top: 30px;
+      }
+    }
+    h3 {
+      font: 600 24px/28px $k2d;
+    }
+    ul {
+      margin-left: 15px;
+      padding-left: 15px;
+      li {
+        list-style-type: disc;
+      }
+    }
+    blockquote {
+      font-style: italic;
+    }
+  }
+  @media all and (max-width: 767px) {
+    margin: 50px 0 78px;
+  }
+}
 footer {
   padding-bottom: 80px;
   .wrapper {
@@ -1305,6 +1338,53 @@ footer {
           * {
             text-decoration: underline;
           }
+        }
+      }
+    }
+  }
+
+  .footer-links {
+    margin: 30px 0 0;
+    width: 100%;
+    text-align: center;
+    a, span {
+      font: 200 18px/27px $k2d;
+      color: #000;
+      margin: 0 15px;
+      position: relative;
+      text-decoration: none;
+      display: inline-block;
+      &:after {
+        display: none;
+        content: '';
+        height: 1px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #000;
+      }
+      &.active,
+      &:hover {
+        text-decoration: none;
+        &:after {
+          display: block;
+        }
+      }
+      &.active {
+        cursor: default;
+      }
+      + a, span {
+        margin-left: 16px;
+        &:before {
+          display: block;
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          background: #000;
+          left: -17px;
+          width: 1px;
         }
       }
     }
