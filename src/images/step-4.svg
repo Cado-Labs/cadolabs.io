@@ -1,0 +1,16 @@
+<svg width="73" height="84" viewBox="0 0 73 84" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(2 2.885)" fill="none" fill-rule="evenodd">
+        <path d="M37.966 65.115h-2.832c-10.378-.016-18.79-8.321-18.803-18.571-.007-6.098 4.25-10.746 4.418-18.851 0-8.604 7.061-15.578 15.772-15.578s15.773 6.974 15.773 15.578c.228 8.258 4.476 12.598 4.417 18.85-.015 10.229-8.39 18.525-18.745 18.572z" stroke="#000" stroke-width="2" fill="#FFF" fill-rule="nonzero"/>
+        <path d="M61.382 45.808c3.77-5.13 5.124-9.103 4.06-11.922-1.063-2.819-5.4-5.504-13.012-8.054" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+        <path d="M28.038 65.115c-1.766 2.053-2.974 4.22-3.625 6.5-.65 2.28-.947 4.446-.89 6.5M10.241 0c.211 10.509.855 17.311 1.93 20.407 1.076 3.096 3.718 5.84 7.928 8.232M43.038 65.115c-.857 1.166-1.61 2.89-2.261 5.169-.65 2.28-.65 5.223 0 8.83" stroke="#000" stroke-width="2" stroke-linecap="square"/>
+        <path d="m28.038 8.643 8.293 10.541 5.333-7.07c-.714-2.46-2.428-4.095-5.142-4.904-2.715-.809-5.542-.331-8.484 1.433z" fill="#000"/>
+        <path stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" d="m31.376 9.517 4.455 6.098"/>
+        <circle fill="#4DE3B6" fill-rule="nonzero" opacity=".604" cx="36.331" cy="27.115" r="5"/>
+        <text font-family="K2D-Medium, K2D Medium" font-size="18" fill="#000">
+                        <tspan x="30.929" y="37.308">4</tspan>
+                    </text>
+        <text font-family="K2D-Medium, K2D Medium" font-size="12" fill="#000">
+                        <tspan x="25.929" y="52.308">step</tspan>
+                    </text>
+    </g>
+</svg>
