@@ -185,8 +185,9 @@ header {
     .menu-toggler {
       display: none;
       background: url("../images/burger-off.svg") no-repeat 50% 50%;
-      width: 33px;
-      height: 29px;
+      background-size: contain;
+      width: 41px;
+      height: 38px;
     }
     ul {
       li {
@@ -240,13 +241,13 @@ header {
         &:after {
           height: 60px;
           width: 47px;
-          top: 32px;
+          top: 25px;
           left: -7px;
         }
       }
       &:before {
-        top: -34px;
-        left: -34px;
+        top: -40px;
+        left: -30px;
         height: 62px;
         transform: rotate(-10deg);
         width: 150px;
@@ -254,12 +255,25 @@ header {
       .menu-toggler {
         cursor: pointer;
         display: block;
-        margin-top: -11px;
+        margin-top: -24px;
       }
       ul {
-        display: none;
+        display: flex;
+        flex-wrap: wrap;
+        background: #c9f6e9;
+        position: absolute;
+        transition: all .2s .3s linear;
+        overflow: hidden;
+        max-height: 265px;
+        height: 265px;
+        width: 0;
+        top: 84px;
+        right: -40px;
+        padding: 0;
         li {
           padding: 0;
+          transform: scale(0);
+          transition: all .1s .2s linear;
           &.active {
             &:before {
               display: none;
@@ -293,14 +307,13 @@ header {
       }
       &.active {
         ul {
-          display: flex;
-          flex-wrap: wrap;
-          background: #c9f6e9;
-          position: absolute;
-          right: -40px;
-          top: 91px;
+          transition: all .1s .3s linear;
           width: 100vw;
           padding: 20px 40px 20px 55px;
+          li {
+            transition: all .1s .2s linear;
+            transform: scale(1);
+          }
         }
       }
     }
@@ -339,8 +352,10 @@ section {
           color: #fff;
           margin-top: -10px;
           position: relative;
+          justify-content: center;
           &:hover {
-            text-decoration: none;
+            text-decoration: underline;
+            cursor: pointer;
           }
           &:before {
             content: '';
@@ -820,9 +835,21 @@ section {
     flex-wrap: wrap;
     grid-gap: 10px 40px;
     align-items: center;
-    div {
+    .descr {
       font: 200 18px/24px $k2d;
       margin-top: 10px;
+    }
+    .view-all {
+      margin-top: 10px;
+      flex-grow: 1;
+      text-align: right;
+      a {
+        font: 200 18px/24px $k2d;
+        color: #000;
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
   }
   ul {
@@ -903,6 +930,13 @@ section {
       }
     }
   }
+  @media all and (max-width: 1279px) {
+    .header {
+      .descr {
+        order: 1;
+      }
+    }
+  }
   @media all and (max-width: 767px) {
     ul {
       li {
@@ -931,6 +965,9 @@ section {
       padding-right: 0;
       grid-gap: 3px 30px;
       margin-bottom: 33px;
+      .view-all {
+        text-align: left;
+      }
     }
     &:before {
       right: 0;
