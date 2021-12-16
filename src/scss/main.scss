@@ -983,11 +983,10 @@ section {
       width: auto;
     }
     ul {
-      flex-direction: column;
       li {
-        width: 100%;
+        width: 50%;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         .inner {
           width: auto;
         }
@@ -1000,10 +999,12 @@ section {
             width: auto;
           }
         }
+        &:nth-child(2),
         &:nth-child(3),
+        &:nth-child(5),
         &:nth-child(6) {
-          justify-content: center;
-          width: auto;
+          justify-content: flex-start;
+          width: 50%;
         }
       }
     }
