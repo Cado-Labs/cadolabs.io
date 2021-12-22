@@ -45,6 +45,46 @@ table {
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Jura';
+  font-style: normal;
+  src: local('Jura'),
+  url('../fonts/jura.woff2') format('woff2'),
+  url('../fonts/jura.woff') format('woff');
+}
+@font-face {
+  font-family: 'K2D';
+  font-style: normal;
+  font-weight: 200;
+  src: local('K2D'),
+  url('../fonts/k2d-200.woff2') format('woff2'),
+  url('../fonts/k2d-200.woff') format('woff');
+}
+@font-face {
+  font-family: 'K2D';
+  font-style: normal;
+  font-weight: 300;
+  src: local('K2D'),
+  url('../fonts/k2d-300.woff2') format('woff2'),
+  url('../fonts/k2d-300.woff') format('woff');
+}
+@font-face {
+  font-family: 'K2D';
+  font-style: normal;
+  font-weight: 400;
+  src: local('K2D'),
+  url('../fonts/k2d-regular.woff2') format('woff2'),
+  url('../fonts/k2d-regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'K2D';
+  font-style: normal;
+  font-weight: 500;
+  src: local('K2D'),
+  url('../fonts/k2d-500.woff2') format('woff2'),
+  url('../fonts/k2d-500.woff') format('woff');
+}
+
 $jura: 'Jura', sans-serif;
 $k2d: 'K2D', sans-serif;
 $green: #4de3b6;

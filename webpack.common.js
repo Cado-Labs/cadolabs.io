@@ -18,6 +18,7 @@ const templates = [
 module.exports = {
     entry: {
         main: "./src/index.js",
+        sw: "./src/sw.js"
     },
     output: {
         filename: "[name].[contenthash].js",
@@ -43,6 +44,13 @@ module.exports = {
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
+            {
+                test: /\.(eot|ttf|woff|woff2)$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: './fonts/[name][ext]',
+                },
+            }
         ],
     },
     plugins: [
@@ -50,6 +58,8 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: "./src/images/", to: "./images/" },
+                { from: "./src/robots.txt",  to: "robots.txt", toType: "file", },
+                { from: "./src/manifest.json",  to: "manifest.json", toType: "file", },
             ],
         }),
         new MiniCssExtractPlugin({filename: "[name].css"}),
