@@ -1,0 +1,29 @@
+{
+  "name": "Cado Labs",
+  "short_name": "Cado",
+  "icons": [{
+    "src": "images/touch-icons/apple-icon-76x76.png",
+    "sizes": "60x60",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }, {
+    "src": "images/touch-icons/apple-icon-120x120.png",
+    "sizes": "114x114",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }, {
+    "src": "images/touch-icons/apple-icon-152x152.png",
+    "sizes": "144x144",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }, {
+    "src": "images/touch-icons/apple-icon-512x512.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
