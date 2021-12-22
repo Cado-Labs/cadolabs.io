@@ -48,6 +48,7 @@ table {
 @font-face {
   font-family: 'Jura';
   font-style: normal;
+  font-display: swap;
   src: local('Jura'),
   url('../fonts/jura.woff2') format('woff2'),
   url('../fonts/jura.woff') format('woff');
@@ -56,6 +57,7 @@ table {
   font-family: 'K2D';
   font-style: normal;
   font-weight: 200;
+  font-display: swap;
   src: local('K2D'),
   url('../fonts/k2d-200.woff2') format('woff2'),
   url('../fonts/k2d-200.woff') format('woff');
@@ -64,6 +66,7 @@ table {
   font-family: 'K2D';
   font-style: normal;
   font-weight: 300;
+  font-display: swap;
   src: local('K2D'),
   url('../fonts/k2d-300.woff2') format('woff2'),
   url('../fonts/k2d-300.woff') format('woff');
@@ -72,6 +75,7 @@ table {
   font-family: 'K2D';
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
   src: local('K2D'),
   url('../fonts/k2d-regular.woff2') format('woff2'),
   url('../fonts/k2d-regular.woff') format('woff');
@@ -80,6 +84,7 @@ table {
   font-family: 'K2D';
   font-style: normal;
   font-weight: 500;
+  font-display: swap;
   src: local('K2D'),
   url('../fonts/k2d-500.woff2') format('woff2'),
   url('../fonts/k2d-500.woff') format('woff');

@@ -18,7 +18,6 @@ const templates = [
 module.exports = {
     entry: {
         main: "./src/index.js",
-        sw: "./src/sw.js"
     },
     output: {
         filename: "[name].[contenthash].js",
