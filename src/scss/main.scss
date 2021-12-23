@@ -875,11 +875,14 @@ section {
   .cado-has-denies {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: nowrap;
     margin-top: 40px;
-    grid-gap: 0 20px;
     > div {
-      width: 50%;
+      width: calc(50% - 10px);
       position: relative;
+      + div {
+        margin-left: 20px;
+      }
       .title {
         font: 500 24px/28px $k2d;
         margin-bottom: 27px;
@@ -950,10 +953,13 @@ section {
     margin: 50px 0 78px;
     .cado-has-denies {
       flex-direction: column;
-      grid-gap: 40px 0;
+      flex-wrap: wrap;
       align-items: center;
       > div {
         width: auto;
+        + div {
+          margin: 40px 0 0;
+        }
       }
     }
   }
@@ -966,9 +972,11 @@ section {
     }
     .cado-has-denies {
       margin-top: 32px;
-      grid-gap: 30px 0;
       > div {
         padding-left: 20px;
+        + div {
+          margin-top: 30px;
+        }
         .title {
           margin-bottom: 33px;
         }
@@ -1010,13 +1018,14 @@ section {
     }
   }
   ul {
-    display: flex;
+    display: grid;
     justify-content: flex-start;
     align-items: flex-start;
     grid-gap: 90px 20px;
+    grid-template-columns: repeat(4,1fr);
     li {
       display: flex;
-      width: 25%;
+      width: 100%;
       align-items: center;
       justify-content: flex-start;
       img {
@@ -1092,6 +1101,7 @@ section {
       flex-wrap: wrap;
       grid-gap: 90px 0;
       position: relative;
+      grid-template-columns: repeat(2, 1fr);
       &:before {
         display: block;
         content: '';
@@ -1104,21 +1114,17 @@ section {
         left: 0;
         right: 0;
       }
-      li {
-        width: 50%;
-      }
     }
   }
   @media all and (max-width: 639px) {
     ul {
       grid-gap: 30px 0;
-      flex-direction: column;
+      grid-template-columns: repeat(1, 1fr);
       align-items: center;
       &:before {
         display: none;
       }
       li {
-        width: 100%;
         position: relative;
         justify-content: center;
         > div {
@@ -1144,6 +1150,13 @@ section {
         }
       }
     }
+    .get-offer {
+      &:before {
+        position: relative;
+        width: calc(100% + 42px);
+        left: -21px;
+      }
+    }
   }
   @media all and (max-width: 479px) {
     .wrapper {
@@ -1156,17 +1169,12 @@ section {
     }
     ul {
       li {
-        width: 100%;
         .title {
           font-size: 18px;
         }
       }
     }
     .get-offer {
-      &:before {
-        width: calc(100% + 42px);
-        left: -21px;
-      }
       .title {
         font-size: 24px;
         line-height: 30px;
@@ -1192,8 +1200,10 @@ section {
     margin-bottom: 54px;
     display: flex;
     flex-wrap: wrap;
-    grid-gap: 10px 40px;
     align-items: center;
+    h2 {
+      padding-right: 40px;
+    }
     .descr {
       font: 200 18px/24px $k2d;
       margin-top: 10px;
@@ -1265,7 +1275,6 @@ section {
     }
     .header {
       padding-right: 40px;
-      grid-gap: 3px 30px;
       margin-bottom: 33px;
     }
     &:before {
@@ -1293,6 +1302,8 @@ section {
     .header {
       .descr {
         order: 1;
+        width: 100%;
+        margin-top: 13px;
       }
     }
   }
@@ -1322,8 +1333,6 @@ section {
     }
     .header {
       padding-right: 0;
-      grid-gap: 3px 30px;
-      margin-bottom: 33px;
       .view-all {
         text-align: left;
       }
@@ -1393,13 +1402,13 @@ section {
 .cado-do {
   margin-top: 105px;
   ul {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: flex-start;
-    flex-wrap: wrap;
     margin-top: 34px;
     grid-gap: 60px 0;
     li {
-      width: 33.3%;
+      width: calc(100% - 10px);
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -1432,9 +1441,8 @@ section {
     ul {
       grid-gap: 40px 20px;
       justify-content: center;
+      grid-template-columns: repeat(2, 1fr);
       li {
-        width: calc(50% - 10px);
-        min-width: 260px;
         $i: 0;
         @each $order in (1, 3, 5, 6 ,4, 2) {
           $i: $i + 1;
@@ -1448,8 +1456,7 @@ section {
   @media all and (max-width: 639px) {
     margin-top: 38px;
     ul {
-      grid-gap: 40px 20px;
-      justify-content: center;
+      grid-template-columns: repeat(1, 1fr);
       li {
         width: 100%;
         min-width: 100%;
@@ -1766,7 +1773,9 @@ section {
   .wrapper {
     display: flex;
     align-items: center;
-    grid-gap: 0 30px;
+  }
+  .descr {
+    margin: 0 0 0 30px;
   }
   h1 {
     font: 600 38px/60px $k2d;
@@ -1779,9 +1788,9 @@ section {
     .wrapper {
       flex-direction: column;
       align-items: flex-start;
-      grid-gap: 26px 0;
     }
     .descr {
+      margin: 26px 0 0 0;
       span {
         margin-top: 16px;
         display: inline-block;
@@ -1805,10 +1814,8 @@ section {
     margin-top: 14px;
     font-size: 14px;
     line-height: 18px;
-    .wrapper {
-      grid-gap: 20px 0;
-    }
     .descr {
+      margin-top: 20px;
       width: calc(100% - 127px);
       min-width: calc(320px - 42px);
     }
@@ -1956,6 +1963,10 @@ footer {
   nav {
     ul {
       li {
+        a, span {
+          font-size: 18px;
+          line-height: 24px;
+        }
         &.active {
           * {
             text-decoration: underline;
@@ -2014,10 +2025,10 @@ footer {
     nav {
       ul {
         flex-wrap: wrap;
-        grid-gap: 30px 20px;
         li {
+          margin-top: 20px;
           + li {
-            margin-left: 0;
+            margin-left: 30px;
           }
         }
       }
@@ -2026,7 +2037,9 @@ footer {
   @media all and (max-width: 1279px) {
     .wrapper {
       flex-direction: column-reverse;
-      grid-gap: 50px;
+      .adress {
+        margin-top: 50px;
+      }
     }
   }
   @media all and (max-width: 639px) {
@@ -2040,15 +2053,27 @@ footer {
     width: 100vw;
     padding-bottom: 36px;
     .wrapper {
-      grid-gap: 30px;
+      .adress {
+        margin-top: 30px;
+      }
     }
     nav {
       width: 100%;
       ul {
         justify-content: space-between;
+        display: grid;
         grid-gap: 20px 0;
+        grid-template-columns: repeat(2, 1fr);
         li {
-          width: 50%;
+          width: 100%;
+          margin-top: 0;
+          a, span {
+            font-size: 14px;
+            line-height: 19px;
+          }
+          + li {
+            margin-left: 0;
+          }
           $i: 0;
           @each $order in (1, 3, 5, 2, 4) {
             $i: $i + 1;
