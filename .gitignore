@@ -1,0 +1,6 @@
+/.idea
+
+/.cache
+/build
+/public/build
+/node_modules
