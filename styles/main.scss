@@ -319,7 +319,7 @@ header {
           }
         }
         @for $i from 1 through 5 {
-          &:nth-child(#{$i}) {
+          &:nth-of-type(#{$i}) {
             &.active {
               &:before {
                 top: 22px - 9px*($i - 1);
@@ -1133,7 +1133,7 @@ section {
 }
 .cado-looking-for {
   position: relative;
-  margin: 100px 0;
+  margin: 100px 0 0;
   &:before {
     display: block;
     content: '';
@@ -1245,7 +1245,7 @@ section {
     padding: 60px 75px 55px 15px;
   }
   @media all and (max-width: 1317px) {
-    margin: 80px 0;
+    margin: 80px 0 0;
     .wrapper {
       padding: 40px 0 50px 40px;
     }
@@ -1340,7 +1340,7 @@ section {
     }
   }
   @media all and (max-width: 479px) {
-    margin: 46px 0 30px;
+    margin: 46px 0 0;
     .wrapper {
       padding: 22px 20px 12px;
     }
@@ -1928,7 +1928,7 @@ section {
 }
 
 footer {
-  padding-bottom: 80px;
+  padding: 100px 0 80px;
   .wrapper {
     display: flex;
     justify-content: space-between;
@@ -2002,6 +2002,7 @@ footer {
     }
   }
   @media all and (max-width: 1347px) {
+    padding-top: 80px;
     nav {
       ul {
         flex-wrap: wrap;
@@ -2031,7 +2032,7 @@ footer {
   }
   @media all and (max-width: 479px) {
     width: 100vw;
-    padding-bottom: 36px;
+    padding: 30px 0 36px;
     .wrapper {
       .adress {
         margin-top: 30px;
