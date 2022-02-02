@@ -8,17 +8,18 @@ export const meta: MetaFunction = () => {
 };
 export const loader: LoaderFunction = async ({request, params}) => {
   const baseUrl = new URL(request.url);
-  let data= {list: null, currentPageId: null};
+  let data= {list: null, currentSlug: null};
   const response = await fetch(`${baseUrl.origin}/api/airtable/getTable`, {
     method: "GET"
   });
   data.list = await response.json();
-  data.currentPageId = params.careerId;
+  data.list.records.map(item=>item.slug = item.fields.slug);
+  data.currentSlug = params.careerId;
   return data;
 }
 
 export default function DynamicCareer() {
-  const careerDataRaw = useLoaderData().list.records.filter(arr => arr.id ===useLoaderData().currentPageId);
+  const careerDataRaw = useLoaderData().list.records.filter(arr => arr.slug ===useLoaderData().currentSlug);
   const careerData = careerDataRaw[0].fields;
   const vacanciesList = useLoaderData().list.records;
   return (
@@ -42,9 +43,7 @@ export default function DynamicCareer() {
               <p>We adopt the <b>gRPC</b> framework in our platform or migrate our interfaces to a <b>micro-frontend
                 pattern</b>.</p>
               <p>We actively use and support <b>open source products</b>.</p>
-              <p>You can have a look at some of our code in our <br /> <a href="https://github.com/Cado-Labs"
-                                                                        rel="noreferrer" target="_blank">GitHub
-                account</a>.</p>
+              <p>You can have a look at some of our code in our <br /> <a href="https://github.com/Cado-Labs" rel="noreferrer" target="_blank">GitHub account</a>.</p>
             </div>
           </div>
         </section>
@@ -116,5 +115,5 @@ export default function DynamicCareer() {
         </section>
         {vacanciesList ? <VacanciesList data={vacanciesList} /> : ''}
       </div>
-);
+  );
 }

@@ -18,7 +18,7 @@ export default function VacanciesList(data) {
                                 <Link
                                     title={vacancy.fields.url}
                                     key={vacancy.id}
-                                    to={`/careers/${vacancy.id}`}
+                                    to={`/careers/${vacancy.fields.slug}`}
                                     prefetch="intent"
                                 >
                                     <div className="title">{vacancy.fields.card_title}</div>
