@@ -1811,6 +1811,7 @@ section {
 }
 .about-vacancy {
   margin-top: 34px;
+  min-height: 670px;
   .more-info {
     + .more-info {
       margin-top: 44px;
@@ -1828,6 +1829,12 @@ section {
         }
       }
     }
+  }
+  @media all and (max-width: 1249px) {
+    min-height: 560px;
+  }
+  @media all and (max-width: 1023px) {
+    min-height: auto;
   }
   @media all and (max-width: 539px) {
     font-size: 14px;

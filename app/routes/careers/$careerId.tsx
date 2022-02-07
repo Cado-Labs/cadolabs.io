@@ -57,22 +57,30 @@ export default function DynamicCareer() {
         </section>
         <section className="about-vacancy">
           <div className="wrapper">
+            {careerData.responsibilities &&
             <div className="more-info">
               <div className="title">YOUR Responsibilities:</div>
               <ul dangerouslySetInnerHTML={{__html: careerData.responsibilities}} />
             </div>
+            }
+            {careerData.requirements &&
             <div className="more-info">
               <div className="title">OUR Requirements:</div>
               <ul dangerouslySetInnerHTML={{__html: careerData.requirements}} />
             </div>
+            }
+            {careerData.considered &&
             <div className="more-info">
               <div className="title">CONSIDERED as an advantage:</div>
               <ul dangerouslySetInnerHTML={{__html: careerData.considered}} />
             </div>
+            }
+            {careerData.we_offer &&
             <div className="more-info">
               <div className="title">WHAT we offer:</div>
               <ul dangerouslySetInnerHTML={{__html: careerData.we_offer }} />
             </div>
+            }
             <div className="more-info">
               <div className="title">Apply by sending CV to <a href="mailto:hr@cadolabs.io">hr@cadolabs.io</a></div>
             </div>
