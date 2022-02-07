@@ -1,9 +1,14 @@
 import type { MetaFunction, LoaderFunction } from "remix";
 import VacanciesList from "~/components/vacancies";
-import {useLoaderData, useParams} from "remix";
-export const meta: MetaFunction = () => {
+import {useLoaderData} from "remix";
+export const meta: MetaFunction = ({ data }) => {
+  if (!data) {
+    return {title: "Oops..."}
+  }
+  const findCurrentVacancy = data.list.records.filter(arr => arr.slug === data.currentSlug);
+  const currentVacancy = findCurrentVacancy[0].fields;
   return {
-    title: "Cadolabs - careers",
+    title: currentVacancy.page_title ? `${currentVacancy.page_title}` : "Vacancy"
   }
 };
 export const loader: LoaderFunction = async ({request, params}) => {
@@ -15,6 +20,9 @@ export const loader: LoaderFunction = async ({request, params}) => {
   data.list = await response.json();
   data.list.records.map(item=>item.slug = item.fields.slug);
   data.currentSlug = params.careerId;
+  if (!data.list.records.filter(arr => arr.slug === params.careerId).length) {
+    throw new Response("Not Found", { status: 404 });
+  }
   return data;
 }
 

@@ -286,7 +286,7 @@ header {
     .ul {
       a {
         padding: 0 24px;
-        display: inline-block;
+        display: flex;
         text-decoration: none;
         + a {
           margin-left: 0;
@@ -297,7 +297,7 @@ header {
             position: relative;
             &:after {
               height: 3px;
-              bottom: -7px;
+              bottom: 18px;
               display: block;
               content: '';
               right: 0;
@@ -509,7 +509,8 @@ section {
     }
   }
 }
-.about-us {
+.about-us,
+.page-not-found {
   margin: 90px 0 106px;
   h1 {
     width: 890px;
@@ -1959,7 +1960,7 @@ footer {
     margin: 30px 0 0;
     width: 100%;
     text-align: center;
-    a, span {
+    a {
       font: 200 18px/27px $k2d;
       color: #000;
       margin: 0 15px;
@@ -1976,6 +1977,21 @@ footer {
         bottom: 0;
         background: #000;
       }
+      &:before {
+        display: block;
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background: #000;
+        left: -17px;
+        width: 1px;
+      }
+      &:first-of-type {
+        &:before {
+          display: none;
+        }
+      }
       &.active,
       &:hover {
         text-decoration: none;
@@ -1985,19 +2001,6 @@ footer {
       }
       &.active {
         cursor: default;
-      }
-      + a, + span {
-        margin-left: 16px;
-        &:before {
-          display: block;
-          content: '';
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          background: #000;
-          left: -17px;
-          width: 1px;
-        }
       }
     }
   }

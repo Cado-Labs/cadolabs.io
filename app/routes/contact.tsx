@@ -41,13 +41,13 @@ export default function Contact() {
             <div className="contact-form">
               <div className="contact-form-inner">
                 <h2>Let’s talk</h2>
-                <p>For1 any inquiries please contact us at <a href="mailto:info@cadolabs.io">info@cadolabs.io</a></p>
+                <p>For any inquiries please contact us at <a href="mailto:info@cadolabs.io">info@cadolabs.io</a></p>
                 <Form reloadDocument method="post">
                   <div className="input-outer">
                     <input type="text" placeholder="Your name" name="name" required />
                   </div>
                   <div className="input-outer">
-                    <input type="email" placeholder="Email" name="email" required />
+                    <input type="email" placeholder="Email" name="email" pattern="^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" required />
                   </div>
                   <div className="input-outer">
                     <textarea name="message" id="" cols="30" rows="7" placeholder="Message" required />
