@@ -1,6 +1,7 @@
-import type {ActionFunction, LoaderFunction, MetaFunction} from "remix";
-import {Form, redirect, useLoaderData} from "remix";
+import type {ActionFunction, MetaFunction} from "remix";
+import {Form, redirect, useFetcher} from "remix";
 import VacanciesList from "~/components/vacancies";
+import {useEffect} from "react";
 
 export const meta: MetaFunction = () => {
   return {
@@ -21,15 +22,11 @@ export const action: ActionFunction = async ({request}) => {
   return redirect(`/contact`);
 }
 
-export const loader: LoaderFunction = async (context) => {
-  const baseUrl = new URL(context.request.url);
-  return await fetch(`${baseUrl.origin}/api/airtable/getTable`, {
-    method: "GET"
-  });
-}
-
 export default function Contact() {
-  const vacanciesList = JSON.parse(useLoaderData()).records;
+  let fetcher = useFetcher();
+  useEffect(() => {
+    fetcher.load('/airtable/getTable');
+  }, []);
   return (
       <div>
         <section className="contact">
@@ -60,7 +57,7 @@ export default function Contact() {
             </div>
           </div>
         </section>
-        {vacanciesList ? <VacanciesList data={vacanciesList} /> : ''}
+        {fetcher.data ? <VacanciesList data={fetcher.data} /> : null}
       </div>
-);
+  );
 }

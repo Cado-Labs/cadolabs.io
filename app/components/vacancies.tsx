@@ -1,6 +1,7 @@
 import { Link } from 'remix';
 
 export default function VacanciesList(data) {
+    const vacancyList = JSON.parse(data.data).records;
     return (
         <section className="cado-looking-for">
             <div className="wrapper">
@@ -12,7 +13,7 @@ export default function VacanciesList(data) {
                     <div className="view-all"><a href="/careers">View all vacancies</a></div>
                 </div>
                 <ul>
-                    {data.data.map((vacancy, index) => (
+                    {vacancyList.map((vacancy, index) => (
                         <li key={index}>
                             <div className="inner">
                                 <Link

@@ -1,6 +1,7 @@
 import type { MetaFunction, LoaderFunction } from "remix";
 import VacanciesList from "~/components/vacancies";
-import {useLoaderData} from "remix";
+import {useFetcher, useLoaderData} from "remix";
+import {useEffect} from "react";
 export const meta: MetaFunction = ({ data }) => {
   if (!data) {
     return {title: "Oops..."}
@@ -29,7 +30,10 @@ export const loader: LoaderFunction = async ({request, params}) => {
 export default function DynamicCareer() {
   const careerDataRaw = useLoaderData().list.records.filter(arr => arr.slug ===useLoaderData().currentSlug);
   const careerData = careerDataRaw[0].fields;
-  const vacanciesList = useLoaderData().list.records;
+  let fetcher = useFetcher();
+  useEffect(() => {
+    fetcher.load('/airtable/getTable');
+  }, []);
   return (
       <div>
         <div className="wrapper back-to-page">
@@ -51,35 +55,37 @@ export default function DynamicCareer() {
               <p>We adopt the <b>gRPC</b> framework in our platform or migrate our interfaces to a <b>micro-frontend
                 pattern</b>.</p>
               <p>We actively use and support <b>open source products</b>.</p>
-              <p>You can have a look at some of our code in our <br /> <a href="https://github.com/Cado-Labs" rel="noreferrer" target="_blank">GitHub account</a>.</p>
+              <p>You can have a look at some of our code in our <br /> <a href="https://github.com/Cado-Labs"
+                                                                        rel="noreferrer" target="_blank">GitHub
+                account</a>.</p>
             </div>
           </div>
         </section>
         <section className="about-vacancy">
           <div className="wrapper">
             {careerData.responsibilities &&
-            <div className="more-info">
-              <div className="title">YOUR Responsibilities:</div>
-              <ul dangerouslySetInnerHTML={{__html: careerData.responsibilities}} />
-            </div>
+              <div className="more-info">
+                <div className="title">YOUR Responsibilities:</div>
+                <ul dangerouslySetInnerHTML={{__html: careerData.responsibilities}} />
+              </div>
             }
             {careerData.requirements &&
-            <div className="more-info">
-              <div className="title">OUR Requirements:</div>
-              <ul dangerouslySetInnerHTML={{__html: careerData.requirements}} />
-            </div>
+              <div className="more-info">
+                <div className="title">OUR Requirements:</div>
+                <ul dangerouslySetInnerHTML={{__html: careerData.requirements}} />
+              </div>
             }
             {careerData.considered &&
-            <div className="more-info">
-              <div className="title">CONSIDERED as an advantage:</div>
-              <ul dangerouslySetInnerHTML={{__html: careerData.considered}} />
-            </div>
+              <div className="more-info">
+                <div className="title">CONSIDERED as an advantage:</div>
+                <ul dangerouslySetInnerHTML={{__html: careerData.considered}} />
+              </div>
             }
             {careerData.we_offer &&
-            <div className="more-info">
-              <div className="title">WHAT we offer:</div>
-              <ul dangerouslySetInnerHTML={{__html: careerData.we_offer }} />
-            </div>
+              <div className="more-info">
+                <div className="title">WHAT we offer:</div>
+                <ul dangerouslySetInnerHTML={{__html: careerData.we_offer }} />
+              </div>
             }
             <div className="more-info">
               <div className="title">Apply by sending CV to <a href="mailto:hr@cadolabs.io">hr@cadolabs.io</a></div>
@@ -129,7 +135,7 @@ export default function DynamicCareer() {
             </ul>
           </div>
         </section>
-        {vacanciesList ? <VacanciesList data={vacanciesList} /> : ''}
+        {fetcher.data ? <VacanciesList data={fetcher.data} /> : null}
       </div>
-  );
+);
 }

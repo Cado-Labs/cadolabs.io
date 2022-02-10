@@ -1,6 +1,7 @@
 import type {MetaFunction} from "remix";
-import {LoaderFunction, useLoaderData} from "remix";
+import {useFetcher} from "remix";
 import VacanciesList from "~/components/vacancies";
+import {useEffect} from "react";
 
 export const meta: MetaFunction = () => {
   return {
@@ -8,16 +9,12 @@ export const meta: MetaFunction = () => {
   }
 };
 
-export const loader: LoaderFunction = async (context) => {
-  const baseUrl = new URL(context.request.url);
-  return await fetch(`${baseUrl.origin}/api/airtable/getTable`, {
-    method: "GET"
-  });
-}
-
 export default function Index() {
-  const vacanciesList = JSON.parse(useLoaderData()).records;
-  return (
+    let fetcher = useFetcher();
+    useEffect(() => {
+        fetcher.load('/airtable/getTable');
+    }, []);
+    return (
       <div>
         <section className="about-us">
           <div className="wrapper">
@@ -120,7 +117,7 @@ export default function Index() {
             </ul>
           </div>
         </section>
-        {vacanciesList ? <VacanciesList data={vacanciesList} /> : ''}
+        {fetcher.data ? <VacanciesList data={fetcher.data} /> : null}
       </div>
   );
 }
