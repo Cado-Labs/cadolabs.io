@@ -596,6 +596,7 @@ section {
       }
       form {
         width: 100%;
+        position: relative;
         .input-outer {
           input,
           textarea {
@@ -692,6 +693,25 @@ section {
             }
           }
         }
+      }
+    }
+    .form-message {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 0 14px;
+      border-radius: 8px;
+      box-shadow: 0 2px 0 0 #4de3b6;
+      border: solid 2px #2e3255;
+      background-color: #fff;
+      p {
+        height: auto;
+        padding: 14px 0;
+        margin: 0;
       }
     }
   }
@@ -805,6 +825,12 @@ section {
               }
             }
           }
+        }
+      }
+      .form-message {
+        border: solid 1px #2e3255;
+        p {
+          margin: 0;
         }
       }
     }

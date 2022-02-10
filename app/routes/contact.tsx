@@ -1,7 +1,7 @@
 import type {ActionFunction, MetaFunction} from "remix";
-import {Form, redirect, useFetcher} from "remix";
+import {Form, useFetcher, useTransition} from "remix";
 import VacanciesList from "~/components/vacancies";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 
 export const meta: MetaFunction = () => {
   return {
@@ -11,6 +11,7 @@ export const meta: MetaFunction = () => {
 
 
 export const action: ActionFunction = async ({request}) => {
+  await new Promise((res) => setTimeout(res, 2000));
   const body = await request.formData();
   const baseUrl = new URL(request.url);
   const response = await fetch(`${baseUrl.origin}/api/airtable/sendMessage`, {
@@ -18,15 +19,21 @@ export const action: ActionFunction = async ({request}) => {
     body: body,
   })
       .then(response => {return response.json()})
-  .catch(e => {e.message});
-  return redirect(`/contact`);
+      .catch(e => {e.message});
+  return true;
 }
 
 export default function Contact() {
+  let transition = useTransition();
   let fetcher = useFetcher();
+  let formRef = useRef();
   useEffect(() => {
-    fetcher.load('/airtable/getTable');
-  }, []);
+        if (transition.state === 'loading') {
+          formRef.current?.reset();
+        }
+        fetcher.load('/airtable/getTable');
+      }, [transition]
+  );
   return (
       <div>
         <section className="contact">
@@ -39,7 +46,7 @@ export default function Contact() {
               <div className="contact-form-inner">
                 <h2>Let’s talk</h2>
                 <p>For any inquiries please contact us at <a href="mailto:info@cadolabs.io">info@cadolabs.io</a></p>
-                <Form reloadDocument method="post">
+                <Form ref={formRef} method="post">
                   <div className="input-outer">
                     <input type="text" placeholder="Your name" name="name" required />
                   </div>
@@ -52,8 +59,13 @@ export default function Contact() {
                   <div className="input-outer">
                     <button type="submit" value="Send">Send</button>
                   </div>
+                  {transition.state === "submitting" &&
+                  <div className="form-message">
+                    <p>Your message has been sent</p>
+                  </div>
+                  }
                 </Form>
-            </div>
+              </div>
             </div>
           </div>
         </section>
