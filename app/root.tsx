@@ -11,11 +11,10 @@ import {
 } from "remix";
 import type { MetaFunction } from "remix";
 import styles from "~/styles/main.css";
-import common from "~/styles/common.css";
 import {useLocation} from "react-router";
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles },{ rel: 'stylesheet', href: common }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 export const meta: MetaFunction = () => {
