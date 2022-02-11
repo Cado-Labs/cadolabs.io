@@ -4,3 +4,4 @@
 /build
 /public/build
 /node_modules
+/app/styles/*

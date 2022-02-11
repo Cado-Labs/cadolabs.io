@@ -1,4 +1,4 @@
-import type { MetaFunction, LoaderFunction } from "remix";
+import type { MetaFunction, LoaderFunction, Link } from "remix";
 import VacanciesList from "~/components/vacancies";
 import {useFetcher, useLoaderData} from "remix";
 import {useEffect} from "react";
@@ -37,7 +37,7 @@ export default function DynamicCareer() {
   return (
       <div>
         <div className="wrapper back-to-page">
-          <a href="/careers">back to All Vacancies</a>
+          <Link to="/career">back to All Vacancies</Link>
         </div>
         <section className="vacancy">
           <div className="wrapper">

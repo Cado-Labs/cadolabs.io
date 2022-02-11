@@ -445,6 +445,9 @@ header {
       .ul {
         height: 176px;
         max-height: 176px;
+        a.active > span:after {
+          bottom: 0;
+        }
       }
       &.decorated {
         &:after {
