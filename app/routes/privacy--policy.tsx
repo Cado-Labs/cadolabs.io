@@ -8,7 +8,7 @@ export const meta: MetaFunction = () => {
   }
 };
 
-export default function Privacy() {
+export default function PrivacyPolicy() {
     let fetcher = useFetcher();
     useEffect(() => {
       fetcher.load('/airtable/getTable');

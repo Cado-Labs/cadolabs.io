@@ -1,6 +1,6 @@
-import type { MetaFunction, LoaderFunction, Link } from "remix";
+import type { MetaFunction, LoaderFunction } from "remix";
 import VacanciesList from "~/components/vacancies";
-import {useFetcher, useLoaderData} from "remix";
+import {useFetcher, Link, useLoaderData} from "remix";
 import {useEffect} from "react";
 export const meta: MetaFunction = ({ data }) => {
   if (!data) {

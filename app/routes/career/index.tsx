@@ -1,6 +1,6 @@
-import type { MetaFunction, Link } from "remix";
+import type { MetaFunction } from "remix";
 import VacanciesList from "~/components/vacancies";
-import {LoaderFunction, useFetcher, useLoaderData} from "remix";
+import {LoaderFunction, Link, useFetcher, useLoaderData} from "remix";
 import {useEffect} from "react";
 export const meta: MetaFunction = () => {
   return {
@@ -28,7 +28,7 @@ export default function CareerIndex() {
                   <li>Personal responsibility of each team member</li>
                   <li>Supportive and friendly Team</li>
                   <li>Latest technology tools</li>
-                  <li><b>Check out </b> <Link to="/tech-radar"> our Tech Radar!</Link></li>
+                  <li><b>Check out </b> <Link to="/tech--radar"> our Tech Radar!</Link></li>
                 </ul>
               </div>
               <div>

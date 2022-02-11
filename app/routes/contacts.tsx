@@ -23,7 +23,7 @@ export const action: ActionFunction = async ({request}) => {
   return true;
 }
 
-export default function Contact() {
+export default function Contacts() {
   let transition = useTransition();
   let fetcher = useFetcher();
   let formRef = useRef();

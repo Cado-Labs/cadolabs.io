@@ -177,7 +177,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                     <span>Careers</span>
                   </NavLink>
                   <NavLink
-                      to="/contact"
+                      to="/contacts"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
@@ -189,7 +189,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                     </span>
                   </a>
                   <NavLink
-                      to="/tech-radar"
+                      to="/tech--radar"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
@@ -230,7 +230,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                 </li>
                 <li>
                   <NavLink
-                      to="/contact"
+                      to="/contacts"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
@@ -245,7 +245,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                 </a></li>
                 <li>
                   <NavLink
-                      to="/tech-radar"
+                      to="/tech--radar"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
@@ -258,14 +258,14 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
           <div className="wrapper">
             <div className="footer-links">
               <NavLink
-                  to="/privacy"
+                  to="/privacy--policy"
                   prefetch="intent"
                   className={({ isActive }) => isActive ? activeClassName : undefined}
               >
                 Privacy Policy
               </NavLink>
               <NavLink
-                  to="/cookie-policy"
+                  to="/cookie--policy"
                   prefetch="intent"
                   className={({ isActive }) => isActive ? activeClassName : undefined}
               >
