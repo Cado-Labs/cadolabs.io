@@ -10,7 +10,11 @@ export default function VacanciesList(data) {
                     <div className="descr">If you are dynamic and motivated to do something big, check out our open
                         positions!
                     </div>
-                    <div className="view-all"><a href="/careers">View all vacancies</a></div>
+                    <div className="view-all">
+                        <Link to="/career">
+                            View all vacancies
+                        </Link>
+                    </div>
                 </div>
                 <ul>
                     {vacancyList.map((vacancy, index) => (
@@ -19,7 +23,7 @@ export default function VacanciesList(data) {
                                 <Link
                                     title={vacancy.fields.url}
                                     key={vacancy.id}
-                                    to={`/careers/${vacancy.fields.slug}`}
+                                    to={`/career/${vacancy.fields.slug}`}
                                     prefetch="intent"
                                 >
                                     <div className="title">{vacancy.fields.card_title}</div>

@@ -1,5 +1,6 @@
 import {
   Links,
+  Link,
   NavLink,
   LinksFunction,
   LiveReload,
@@ -10,11 +11,10 @@ import {
 } from "remix";
 import type { MetaFunction } from "remix";
 import styles from "~/styles/main.css";
-import common from "~/styles/common.css";
 import {useLocation} from "react-router";
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles },{ rel: 'stylesheet', href: common }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 export const meta: MetaFunction = () => {
@@ -156,9 +156,9 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
         <div className="main-content">
           <header>
             <div className="wrapper">
-              <a href="/">
+              <Link to="/">
                 <img src="/images/cado_logo.svg" alt="Cadolabs" width="135" height="78" />
-              </a>
+              </Link>
               <nav className={menuClass}>
                 <div className="menu-toggler" onClick={ () => menuIsActive=true }></div>
                 <div className="ul">
@@ -170,14 +170,14 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                     <span>About CADO</span>
                   </NavLink>
                   <NavLink
-                      to="/careers"
+                      to="/career"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
                     <span>Careers</span>
                   </NavLink>
                   <NavLink
-                      to="/contact"
+                      to="/contacts"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
@@ -189,7 +189,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                     </span>
                   </a>
                   <NavLink
-                      to="/tech-radar"
+                      to="/tech--radar"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
@@ -221,7 +221,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                 </li>
                 <li>
                   <NavLink
-                      to="/careers"
+                      to="/career"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
@@ -230,7 +230,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                 </li>
                 <li>
                   <NavLink
-                      to="/contact"
+                      to="/contacts"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
@@ -244,9 +244,13 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                        height="19" />
                 </a></li>
                 <li>
-                  <a href="/tech-radar">
+                  <NavLink
+                      to="/tech--radar"
+                      prefetch="intent"
+                      className={({ isActive }) => isActive ? activeClassName : undefined}
+                  >
                     <img src="/images/techradar.svg" alt="techradar" width="99" height="16" />
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </nav>
@@ -254,14 +258,14 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
           <div className="wrapper">
             <div className="footer-links">
               <NavLink
-                  to="/privacy"
+                  to="/privacy--policy"
                   prefetch="intent"
                   className={({ isActive }) => isActive ? activeClassName : undefined}
               >
                 Privacy Policy
               </NavLink>
               <NavLink
-                  to="/cookie-policy"
+                  to="/cookie--policy"
                   prefetch="intent"
                   className={({ isActive }) => isActive ? activeClassName : undefined}
               >
