@@ -150,8 +150,7 @@ function Document({
 function Layout({ children }: React.PropsWithChildren<{}>) {
   let activeClassName = "active";
   let menuIsActive = false;
-  let menuClass = useLocation().pathname === '/' || useLocation().pathname === '/about-us' ? 'menu decorated' : 'menu';
-  let menuLink = useLocation().pathname === '/about-us' ? '/about-us' : '/';
+  let menuClass = useLocation().pathname === '/' ? 'menu decorated' : 'menu';
   return (
       <div className="remix-app">
         <div className="main-content">
@@ -164,7 +163,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                 <div className="menu-toggler" onClick={ () => menuIsActive=true }></div>
                 <div className="ul">
                   <NavLink
-                      to={menuLink}
+                      to="/"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
@@ -213,7 +212,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
               <ul>
                 <li>
                   <NavLink
-                      to={menuLink}
+                      to="/"
                       prefetch="intent"
                       className={({ isActive }) => isActive ? activeClassName : undefined}
                   >
