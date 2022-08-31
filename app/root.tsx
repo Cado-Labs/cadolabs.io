@@ -206,7 +206,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
             <div className="adress">
               411, 4/F, Austin Tower, 22-26, Austin Av., <br />Tsimshatsui, Kowloon, Hong Kong
               <br/><br/>
-              9 Spyrou Kyprianou Av. Office 1, 3070, Limassol, Cyprus
+              1 Alpeon Street, Aradippou, 7105 Larnaca, Cyprus
             </div>
             <nav className="menu">
               <ul>
