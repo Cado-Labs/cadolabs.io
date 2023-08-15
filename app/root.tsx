@@ -204,8 +204,6 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
         <footer>
           <div className="wrapper">
             <div className="adress">
-              411, 4/F, Austin Tower, 22-26, Austin Av., <br />Tsimshatsui, Kowloon, Hong Kong
-              <br/><br/>
               1 Alpeon Street, Aradippou, 7105 Larnaca, Cyprus
             </div>
             <nav className="menu">
