@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/altj/projects/cadolabs.io/app/routes/airtable.getTable.tsx?browser", "../../../app/routes/airtable.getTable.tsx"],
+  "sourcesContent": ["export * from \"/Users/altj/projects/cadolabs.io/app/routes/airtable.getTable.tsx\";", "export const loader = async  ({request}) => {\n    const baseUrl = new URL(request.url);\n    return await fetch(`${baseUrl.origin}/api/airtable/getTable`, {\n        method: \"GET\"\n    });\n}\n"],
+  "mappings": ";;;;;AAAA;;;ACAA;AAAO,IAAM,SAAS,OAAQ,EAAC,cAAa;AACxC,QAAM,UAAU,IAAI,IAAI,QAAQ;AAChC,SAAO,MAAM,MAAM,GAAG,QAAQ,gCAAgC;AAAA,IAC1D,QAAQ;AAAA;AAAA;",
+  "names": []
+}

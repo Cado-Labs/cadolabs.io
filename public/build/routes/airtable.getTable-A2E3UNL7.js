@@ -1,0 +1,1 @@
+import{f as e}from"/build/_shared/chunk-AKSB5QXU.js";e();e();var o=async({request:a})=>{let t=new URL(a.url);return await fetch(`${t.origin}/api/airtable/getTable`,{method:"GET"})};export{o as loader};

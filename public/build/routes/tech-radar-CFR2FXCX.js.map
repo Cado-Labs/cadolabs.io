@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["browser-route-module:/Users/altj/projects/cadolabs.io/app/routes/tech-radar.tsx?browser", "../../../app/routes/tech-radar.tsx"],
+  "sourcesContent": ["export { default, meta } from \"/Users/altj/projects/cadolabs.io/app/routes/tech-radar.tsx\";", "import type {MetaFunction} from \"remix\";\nimport {useFetcher} from \"remix\";\nimport VacanciesList from \"~/components/vacancies\";\nimport {useEffect} from \"react\";\nexport const meta: MetaFunction = () => {\n  return {\n    title: \"Cadolabs - teach radar\",\n  }\n};\n\nexport default function Privacy() {\n    let fetcher = useFetcher();\n    useEffect(() => {\n        fetcher.load('/airtable/getTable');\n    }, []);\n    return (\n      <div>\n        <section className=\"tech-radar\">\n          <div className=\"wrapper\">\n            <iframe src=\"https://cadolabs-techradar.s3-eu-west-1.amazonaws.com/index.html\" height=\"1200\" width=\"100%\" title=\"Tech radar\"/>\n          </div>\n        </section>\n        {fetcher.data ? <VacanciesList data={fetcher.data} /> : null}\n      </div>\n    );\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;AAAA;;;ACAA;AAGA,mBAAwB;AACjB,IAAM,OAAqB,MAAM;AACtC,SAAO;AAAA,IACL,OAAO;AAAA;AAAA;AAII,mBAAmB;AAC9B,MAAI,UAAU;AACd,8BAAU,MAAM;AACZ,YAAQ,KAAK;AAAA,KACd;AACH,SACE,oCAAC,OAAD,MACE,oCAAC,WAAD;AAAA,IAAS,WAAU;AAAA,KACjB,oCAAC,OAAD;AAAA,IAAK,WAAU;AAAA,KACb,oCAAC,UAAD;AAAA,IAAQ,KAAI;AAAA,IAAmE,QAAO;AAAA,IAAO,OAAM;AAAA,IAAO,OAAM;AAAA,QAGnH,QAAQ,OAAO,oCAAC,eAAD;AAAA,IAAe,MAAM,QAAQ;AAAA,OAAW;AAAA;",
+  "names": []
+}
