@@ -1,3 +1,6 @@
+import getAccessToken from "../../utils/getAccessToken";
+import sheetToVacancies from "../../utils/prepareTableData";
+
 export async function onRequest(context) {
     const {
         env, // same as existing Worker API
@@ -12,13 +15,15 @@ export async function onRequest(context) {
 
 
     if (!info) {
-        const res = await fetch(`https://api.airtable.com/v0/${env.BASE_ID}/${env.VACANCY_TABLE}?maxRecords=99&view=Grid%20view`, {
+        const token = await getAccessToken(env);
+        const res = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/${env.GSHEET_ID}/values/Vacancies!A1:Z100`, {
             headers: {
-                Authorization: `Bearer ${env.AIRTABLE_API_KEY}`,
+                Authorization: `Bearer ${token}`,
             },
         })
         const freshData = await res.json();
-        info = JSON.stringify(freshData);
+        info = JSON.stringify(sheetToVacancies(freshData as any));
         console.log('Get data from airtable');
         await context.env.KVDATA.put("tableRecords", info, {
             expirationTtl: 3600,
