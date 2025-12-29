@@ -1,7 +1,8 @@
 import { Link } from 'remix';
 
-export default function VacanciesList(data) {
-    const vacancyList = JSON.parse(data.data).records;
+export default function VacanciesList(data: { data: string; }) {
+    const vacancyList = JSON.parse(data.data);
+
     return (
         <section className="cado-looking-for">
             <div className="wrapper">
