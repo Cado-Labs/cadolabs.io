@@ -6,7 +6,7 @@ export const meta: MetaFunction = ({ data }) => {
   if (!data) {
     return {title: "Oops..."}
   }
-  const findCurrentVacancy = data.list.records.filter(arr => arr.slug === data.currentSlug);
+  const findCurrentVacancy = data.list.filter(arr => arr.slug === data.currentSlug);
   const currentVacancy = findCurrentVacancy[0].fields;
   return {
     title: currentVacancy.page_title ? `${currentVacancy.page_title}` : "Vacancy"
@@ -19,16 +19,16 @@ export const loader: LoaderFunction = async ({request, params}) => {
     method: "GET"
   });
   data.list = await response.json();
-  data.list.records.map(item=>item.slug = item.fields.slug);
+  data.list.map(item=>item.slug = item.fields.slug);
   data.currentSlug = params.careerId;
-  if (!data.list.records.filter(arr => arr.slug === params.careerId).length) {
+  if (!data.list.filter(arr => arr.slug === params.careerId).length) {
     throw new Response("Not Found", { status: 404 });
   }
   return data;
 }
 
 export default function DynamicCareer() {
-  const careerDataRaw = useLoaderData().list.records.filter(arr => arr.slug ===useLoaderData().currentSlug);
+  const careerDataRaw = useLoaderData().list.filter(arr => arr.slug ===useLoaderData().currentSlug);
   const careerData = careerDataRaw[0].fields;
   let fetcher = useFetcher();
   useEffect(() => {
