@@ -25,7 +25,7 @@ const getAccessToken = async (env: { GSHEET_CLIENT_EMAIL: string; GSHEET_PRIVATE
 
     const payload = {
       iss: env.GSHEET_CLIENT_EMAIL,
-      scope: "https://www.googleapis.com/auth/spreadsheets.readonly",
+      scope: "https://www.googleapis.com/auth/spreadsheets",
       aud: "https://oauth2.googleapis.com/token",
       exp: now + 3600,
       iat: now,
