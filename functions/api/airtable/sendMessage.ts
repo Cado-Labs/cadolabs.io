@@ -15,7 +15,7 @@ export async function onRequestPost(context: any) {
     };
 
     const token = await getAccessToken(env);
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${env.GSHEET_VACANCIES_ID}/values/Feedbacks!A1:append?valueInputOption=USER_ENTERED`;
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${env.GSHEET_ID}/values/Feedbacks!A1:append?valueInputOption=USER_ENTERED`;
 
     const response = await fetch(url, {
         method: 'POST',
