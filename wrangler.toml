@@ -1,0 +1,6 @@
+compatibility_date = "2026-03-25"
+pages_build_output_dir = "./build/client"
+
+[[kv_namespaces]]
+binding = "KVDATA"
+# Add `id` and `preview_id` after creating the production KV namespace.

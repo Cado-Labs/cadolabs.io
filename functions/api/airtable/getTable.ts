@@ -1,16 +1,17 @@
 import getAccessToken from "../../utils/getAccessToken";
 import sheetToVacancies from "../../utils/prepareTableData";
+import type { AppEnv } from "../../../types/env";
 
-export async function onRequest(context) {
+export async function onRequest(context: EventContext<AppEnv, string, Record<string, unknown>>) {
     const {
         env, // same as existing Worker API
     } = context;
 
-    const kvDataValue = await context.env.KVDATA.get('tableRecords');
+    const kvDataValue = await context.env.KVDATA?.get('tableRecords');
     let info = null;
     if (kvDataValue) {
         info = kvDataValue;
-        console.log('Get data from KV');
+        console.log('SSSS Get data from KV');
     }
 
 
@@ -23,9 +24,9 @@ export async function onRequest(context) {
             },
         })
         const freshData = await res.json();
-        info = JSON.stringify(sheetToVacancies(freshData as any));
+        info = JSON.stringify(sheetToVacancies(freshData as { values: string[][] }));
         console.log('Get data from airtable');
-        await context.env.KVDATA.put("tableRecords", info, {
+        await context.env.KVDATA?.put("tableRecords", info, {
             expirationTtl: 3600,
         });
     }

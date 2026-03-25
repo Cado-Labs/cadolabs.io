@@ -1,20 +1,44 @@
-import { renderToString } from "react-dom/server";
-import { RemixServer } from "remix";
-import type { EntryContext } from "remix";
+import { renderToReadableStream } from "react-dom/server.browser";
+import { ServerRouter } from "react-router";
+import type { EntryContext } from "react-router";
 
-export default function handleRequest(
+function prependDoctype(stream: ReadableStream) {
+  return new ReadableStream({
+    async start(controller) {
+      controller.enqueue(new TextEncoder().encode("<!DOCTYPE html>"));
+      const reader = stream.getReader();
+
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        controller.enqueue(value);
+      }
+
+      controller.close();
+    },
+  });
+}
+
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  const markup = renderToString(
-    <RemixServer context={remixContext} url={request.url} />
+  const stream = await renderToReadableStream(
+    <ServerRouter context={remixContext} url={request.url} />,
+    {
+      signal: request.signal,
+    }
   );
 
   responseHeaders.set("Content-Type", "text/html");
 
-  return new Response("<!DOCTYPE html>" + markup, {
+  return new Response(prependDoctype(stream), {
     status: responseStatusCode,
     headers: responseHeaders
   });

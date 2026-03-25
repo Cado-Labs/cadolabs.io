@@ -1,6 +1,7 @@
 import getAccessToken from "../../utils/getAccessToken";
+import type { AppEnv } from "../../../types/env";
 
-export async function onRequestPost(context: any) {
+export async function onRequestPost(context: { env: AppEnv; request: Request }) {
     const {
         env,
         request
