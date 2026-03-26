@@ -1,5 +1,5 @@
 /.idea
-
+/.wrangler/
 /.dev.vars
 /.cache
 /build

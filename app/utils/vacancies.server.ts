@@ -36,7 +36,7 @@ export async function getVacancies(env: AppEnv | null): Promise<VacancyRecord[]>
 
   const vacancies = sheetToVacancies(sheetData);
 
-  console.log("Get data from airtable");
+  console.log("Get data from spreadsheets");
   await env.KVDATA?.put(VACANCIES_CACHE_KEY, JSON.stringify(vacancies), {
     expirationTtl: VACANCIES_CACHE_TTL_SECONDS,
   });
