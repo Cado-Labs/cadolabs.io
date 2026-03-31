@@ -9,7 +9,7 @@ export default function Privacy() {
     const vacancies = useVacancies();
     return (
       <div>
-        <section className="content">
+        <section className="content test-1">
           <div className="wrapper">
             <h1>Cookie Policy</h1>
             <div className="text">
