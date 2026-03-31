@@ -1,0 +1,8 @@
+name = "cadolabs-land"
+compatibility_date = "2026-03-25"
+pages_build_output_dir = "./build/client"
+
+[[kv_namespaces]]
+binding = "KVDATA"
+id = "db1466a867004f7fbdc9b28c264e3b49"
+preview_id = "65ba40c4397a4c2bb60d5df137e36332"

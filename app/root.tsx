@@ -2,26 +2,47 @@ import {
   Links,
   Link,
   NavLink,
-  LinksFunction,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration, useCatch
-} from "remix";
-import type { MetaFunction } from "remix";
-import styles from "~/styles/main.css";
-import {useLocation} from "react-router";
+  ScrollRestoration,
+  isRouteErrorResponse,
+  useLocation,
+  useRouteError,
+} from "react-router";
+import type { LinksFunction, MetaFunction } from "react-router";
+import stylesHref from "~/styles/main.css?url";
+import { resolveAppEnv } from "~/utils/env.server";
+import { getVacancies } from "~/utils/vacancies.server";
+import type { AppEnv } from "../types/env";
+
+type LoaderArgs = {
+  context: {
+    cloudflare?: {
+      env?: AppEnv;
+    };
+  };
+};
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles }];
+  return [{ rel: 'stylesheet', href: stylesHref }];
 }
 
 export const meta: MetaFunction = () => {
-  return {
-    title: "Cadolabs - about us",
-    description: "Cadolabs. We are an IT company with a high level of experience in consulting, software enhancement and business growth solutions" };
+  return [
+    { title: "Cadolabs - about us" },
+    {
+      name: "description",
+      content: "Cadolabs. We are an IT company with a high level of experience in consulting, software enhancement and business growth solutions",
+    },
+  ];
 };
+
+export async function loader({ context }: LoaderArgs) {
+  return {
+    vacancies: await getVacancies(resolveAppEnv(context)),
+  };
+}
 
 export default function App() {
   return (
@@ -33,60 +54,62 @@ export default function App() {
   );
 }
 
-export function ErrorBoundary({ error }: { error: Error }) {
-  console.error(error);
-  return (
-      <Document title="Error!">
-        <Layout>
-        <div>
-          <section className="page-not-found">
-            <div className="wrapper">
-              <h1>There was an error</h1>
-              <p>{error.message}</p>
-            </div>
-          </section>
-        </div>
-        </Layout>
-      </Document>
-  );
-}
+export function ErrorBoundary() {
+  const error = useRouteError();
 
-export function CatchBoundary() {
-  const caught = useCatch();
+  if (isRouteErrorResponse(error)) {
+    let message: React.ReactNode;
 
-  let message;
-  switch (caught.status) {
-    case 401:
-      message = (
+    switch (error.status) {
+      case 401:
+        message = (
           <p>
             Oops! Looks like you tried to visit a page that you do not have access
             to.
           </p>
-      );
-      break;
-    case 404:
-      message = (
+        );
+        break;
+      case 404:
+        message = (
           <p>Oops! Looks like you tried to visit a page that does not exist.</p>
-      );
-      break;
+        );
+        break;
+      default:
+        message = <p>{typeof error.data === "string" ? error.data : error.statusText}</p>;
+    }
 
-    default:
-      throw new Error(caught.data || caught.statusText);
+    return (
+      <Document title={`${error.status} ${error.statusText}`}>
+        <Layout>
+          <div>
+            <section className="page-not-found">
+              <div className="wrapper">
+                <h1><b>{error.status}</b> Page Not Found</h1>
+                <p>{message}</p>
+              </div>
+            </section>
+          </div>
+        </Layout>
+      </Document>
+    );
   }
 
+  const message = error instanceof Error ? error.message : "Unknown error";
+  console.error(error);
+
   return (
-      <Document title={`${caught.status} ${caught.statusText}`}>
-          <Layout>
-            <div>
-              <section className="page-not-found">
-                <div className="wrapper">
-                  <h1><b>404</b> Page Not Found</h1>
-                  <p>{message}</p>
-                </div>
-              </section>
+    <Document title="Error!">
+      <Layout>
+        <div>
+          <section className="page-not-found">
+            <div className="wrapper">
+              <h1>There was an error</h1>
+              <p>{message}</p>
             </div>
-          </Layout>
-      </Document>
+          </section>
+        </div>
+      </Layout>
+    </Document>
   );
 }
 
@@ -133,7 +156,7 @@ function Document({
           <meta property="og:image:type" content="image/png"/>
           <meta property="og:image:width" content="180" />
           <meta property="og:image:height" content="180" />
-          <script defer="defer" src="/js/main.js"/>
+          <script defer src="/js/main.js"/>
           <Meta />
           <Links />
         </head>
@@ -141,7 +164,6 @@ function Document({
           {children}
           <ScrollRestoration />
           <Scripts />
-          {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
         </body>
       </html>
   );
@@ -165,21 +187,21 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                   <NavLink
                       to="/"
                       prefetch="intent"
-                      className={({ isActive }) => isActive ? activeClassName : undefined}
+                      className={({ isActive }) => isActive ? activeClassName : ""}
                   >
                     <span>About CADO</span>
                   </NavLink>
                   <NavLink
                       to="/career"
                       prefetch="intent"
-                      className={({ isActive }) => isActive ? activeClassName : undefined}
+                      className={({ isActive }) => isActive ? activeClassName : ""}
                   >
                     <span>Careers</span>
                   </NavLink>
                   <NavLink
                       to="/contacts"
                       prefetch="intent"
-                      className={({ isActive }) => isActive ? activeClassName : undefined}
+                      className={({ isActive }) => isActive ? activeClassName : ""}
                   >
                     <span>Contacts</span>
                   </NavLink>
@@ -191,7 +213,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                   <NavLink
                       to="/tech--radar"
                       prefetch="intent"
-                      className={({ isActive }) => isActive ? activeClassName : undefined}
+                      className={({ isActive }) => isActive ? activeClassName : ""}
                   >
                     <span><img src="/images/techradar.svg" alt="techradar" width="99" height="16" /></span>
                   </NavLink>
@@ -212,7 +234,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                   <NavLink
                       to="/"
                       prefetch="intent"
-                      className={({ isActive }) => isActive ? activeClassName : undefined}
+                      className={({ isActive }) => isActive ? activeClassName : ""}
                   >
                     About CADO
                   </NavLink>
@@ -221,7 +243,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                   <NavLink
                       to="/career"
                       prefetch="intent"
-                      className={({ isActive }) => isActive ? activeClassName : undefined}
+                      className={({ isActive }) => isActive ? activeClassName : ""}
                   >
                     Careers
                   </NavLink>
@@ -230,7 +252,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                   <NavLink
                       to="/contacts"
                       prefetch="intent"
-                      className={({ isActive }) => isActive ? activeClassName : undefined}
+                      className={({ isActive }) => isActive ? activeClassName : ""}
                   >
                     Contacts
                   </NavLink>
@@ -245,7 +267,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                   <NavLink
                       to="/tech--radar"
                       prefetch="intent"
-                      className={({ isActive }) => isActive ? activeClassName : undefined}
+                      className={({ isActive }) => isActive ? activeClassName : ""}
                   >
                     <img src="/images/techradar.svg" alt="techradar" width="99" height="16" />
                   </NavLink>
@@ -258,14 +280,14 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
               <NavLink
                   to="/privacy--policy"
                   prefetch="intent"
-                  className={({ isActive }) => isActive ? activeClassName : undefined}
+                  className={({ isActive }) => isActive ? activeClassName : ""}
               >
                 Privacy Policy
               </NavLink>
               <NavLink
                   to="/cookie--policy"
                   prefetch="intent"
-                  className={({ isActive }) => isActive ? activeClassName : undefined}
+                  className={({ isActive }) => isActive ? activeClassName : ""}
               >
                 Cookie Policy
               </NavLink>

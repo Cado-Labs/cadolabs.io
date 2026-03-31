@@ -1,18 +1,11 @@
-export type TVacancy = {
-  fields: {
-    card_descr: string;
-    card_title: string
-    slug: string;
-  }
-  id: string;
-}
+import type { VacancyRecord } from "../../types/vacancy";
 
 export type TSheetData = {
     values: string[][]
 }
 
 
-const sheetToVacancies = (sheetData: TSheetData): TVacancy[] => {
+const sheetToVacancies = (sheetData: TSheetData): VacancyRecord[] => {
   const values = sheetData.values;
 
   if (!values || values.length < 2) return [];
@@ -27,7 +20,7 @@ const sheetToVacancies = (sheetData: TSheetData): TVacancy[] => {
     });
     return {
       id: `rec${idx + 1}`,
-      fields: fields as unknown as TVacancy["fields"],
+      fields: fields as unknown as VacancyRecord["fields"],
     };
   });
 }

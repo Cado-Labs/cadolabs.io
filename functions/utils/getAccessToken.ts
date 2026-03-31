@@ -78,7 +78,7 @@ const getAccessToken = async (env: { GSHEET_CLIENT_EMAIL: string; GSHEET_PRIVATE
       }),
     });
 
-    const json = await res.json();
+    const json = await res.json() as { access_token?: string };
 
     return json.access_token;
   } catch (error) {

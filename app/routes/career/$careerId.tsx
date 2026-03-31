@@ -1,39 +1,57 @@
-import type { MetaFunction, LoaderFunction } from "remix";
+import type { MetaFunction } from "react-router";
 import VacanciesList from "~/components/vacancies";
-import {useFetcher, Link, useLoaderData} from "remix";
-import {useEffect} from "react";
+import { Link, useLoaderData } from "react-router";
+import { resolveAppEnv } from "~/utils/env.server";
+import { useVacancies } from "~/utils/root-data";
+import { getVacancies } from "~/utils/vacancies.server";
+import type { AppEnv } from "../../../types/env";
+import type { VacancyRecord } from "../../../types/vacancy";
+
+type CareerLoaderData = {
+  list: VacancyRecord[];
+  currentSlug: string;
+};
+
+type LoaderArgs = {
+  request: Request;
+  params: Record<string, string | undefined>;
+  context: {
+    cloudflare: {
+      env: AppEnv;
+    };
+  };
+};
+
 export const meta: MetaFunction = ({ data }) => {
   if (!data) {
-    return {title: "Oops..."}
+    return [{ title: "Oops..." }];
   }
-  const findCurrentVacancy = data.list.filter(arr => arr.slug === data.currentSlug);
-  const currentVacancy = findCurrentVacancy[0].fields;
-  return {
-    title: currentVacancy.page_title ? `${currentVacancy.page_title}` : "Vacancy"
-  }
+
+  const typedData = data as CareerLoaderData;
+  const currentVacancy = typedData.list.find((item) => item.fields.slug === typedData.currentSlug)?.fields;
+
+  return [{ title: currentVacancy?.page_title ? `${currentVacancy.page_title}` : "Vacancy" }];
 };
-export const loader: LoaderFunction = async ({request, params}) => {
-  const baseUrl = new URL(request.url);
-  let data= {list: null, currentSlug: null};
-  const response = await fetch(`${baseUrl.origin}/api/airtable/getTable`, {
-    method: "GET"
-  });
-  data.list = await response.json();
-  data.list.map(item=>item.slug = item.fields.slug);
-  data.currentSlug = params.careerId;
-  if (!data.list.filter(arr => arr.slug === params.careerId).length) {
+export async function loader({ params, context }: LoaderArgs) {
+  const list = await getVacancies(resolveAppEnv(context));
+  const currentSlug = params.careerId;
+
+  if (!currentSlug || !list.some((item) => item.fields.slug === currentSlug)) {
     throw new Response("Not Found", { status: 404 });
   }
-  return data;
+
+  return { list, currentSlug };
 }
 
 export default function DynamicCareer() {
-  const careerDataRaw = useLoaderData().list.filter(arr => arr.slug ===useLoaderData().currentSlug);
-  const careerData = careerDataRaw[0].fields;
-  let fetcher = useFetcher();
-  useEffect(() => {
-    fetcher.load('/airtable/getTable');
-  }, []);
+  const { list, currentSlug } = useLoaderData() as CareerLoaderData;
+  const careerData = list.find((item) => item.fields.slug === currentSlug)?.fields;
+  const vacancies = useVacancies();
+
+  if (!careerData) {
+    return null;
+  }
+
   return (
       <div>
         <div className="wrapper back-to-page">
@@ -42,7 +60,7 @@ export default function DynamicCareer() {
         <section className="vacancy">
           <div className="wrapper">
             <h1>{careerData.page_title}</h1>
-            <div className="descr" dangerouslySetInnerHTML={{__html: careerData.page_short_descr}}/>
+            <div className="descr" dangerouslySetInnerHTML={{__html: careerData.page_short_descr ?? ""}}/>
           </div>
         </section>
         <section className="how-we-do-it">
@@ -135,7 +153,7 @@ export default function DynamicCareer() {
             </ul>
           </div>
         </section>
-        {fetcher.data ? <VacanciesList data={fetcher.data} /> : null}
+        {vacancies.length ? <VacanciesList data={vacancies} /> : null}
       </div>
 );
 }

@@ -1,18 +1,13 @@
-import type { MetaFunction } from "remix";
+import type { MetaFunction } from "react-router";
 import VacanciesList from "~/components/vacancies";
-import {LoaderFunction, Link, useFetcher, useLoaderData} from "remix";
-import {useEffect} from "react";
+import { Link } from "react-router";
+import { useVacancies } from "~/utils/root-data";
 export const meta: MetaFunction = () => {
-  return {
-    title: "Cadolabs - careers",
-  }
+  return [{ title: "Cadolabs - careers" }];
 };
 
 export default function CareerIndex() {
-    let fetcher = useFetcher();
-    useEffect(() => {
-      fetcher.load('/airtable/getTable');
-    }, []);
+    const vacancies = useVacancies();
     return (
       <div>
         <section className="about-career">
@@ -84,7 +79,7 @@ export default function CareerIndex() {
             </div>
           </div>
         </section>
-        {fetcher.data ? <VacanciesList data={fetcher.data} /> : null}
+        {vacancies.length ? <VacanciesList data={vacancies} /> : null}
       </div>
 );
 }

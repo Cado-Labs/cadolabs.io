@@ -1,7 +1,7 @@
-import { createPagesFunctionHandler } from "@remix-run/cloudflare-pages";
+import { createPagesFunctionHandler } from "@react-router/cloudflare";
 
 // @ts-ignore
-import * as build from "../build";
+import * as build from "../build/server/index.js";
 
 const handleRequest = createPagesFunctionHandler({
   build

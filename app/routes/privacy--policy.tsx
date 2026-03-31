@@ -1,18 +1,12 @@
-import type {MetaFunction} from "remix";
-import {useFetcher} from "remix";
+import type { MetaFunction } from "react-router";
 import VacanciesList from "~/components/vacancies";
-import {useEffect} from "react";
+import { useVacancies } from "~/utils/root-data";
 export const meta: MetaFunction = () => {
-  return {
-    title: "Cadolabs - privacy policy",
-  }
+  return [{ title: "Cadolabs - privacy policy" }];
 };
 
 export default function PrivacyPolicy() {
-    let fetcher = useFetcher();
-    useEffect(() => {
-      fetcher.load('/airtable/getTable');
-    }, []);
+    const vacancies = useVacancies();
     return (
       <div>
         <section className="content">
@@ -78,7 +72,7 @@ export default function PrivacyPolicy() {
 
             </div>
         </section>
-        {fetcher.data ? <VacanciesList data={fetcher.data} /> : null}
+        {vacancies.length ? <VacanciesList data={vacancies} /> : null}
       </div>
 );
 }

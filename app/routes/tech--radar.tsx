@@ -1,18 +1,12 @@
-import type {MetaFunction} from "remix";
-import {useFetcher} from "remix";
+import type { MetaFunction } from "react-router";
 import VacanciesList from "~/components/vacancies";
-import {useEffect} from "react";
+import { useVacancies } from "~/utils/root-data";
 export const meta: MetaFunction = () => {
-  return {
-    title: "Cadolabs - teach radar",
-  }
+  return [{ title: "Cadolabs - teach radar" }];
 };
 
 export default function Privacy() {
-    let fetcher = useFetcher();
-    useEffect(() => {
-        fetcher.load('/airtable/getTable');
-    }, []);
+    const vacancies = useVacancies();
     return (
       <div>
         <section className="tech-radar">
@@ -20,7 +14,7 @@ export default function Privacy() {
             <iframe src="https://cadolabs-techradar.s3-eu-west-1.amazonaws.com/index.html" height="1200" width="100%" title="Tech radar"/>
           </div>
         </section>
-        {fetcher.data ? <VacanciesList data={fetcher.data} /> : null}
+        {vacancies.length ? <VacanciesList data={vacancies} /> : null}
       </div>
     );
 }

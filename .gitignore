@@ -1,5 +1,7 @@
 /.idea
-
+/.react-router/
+/.wrangler/
+/.dev.vars
 /.cache
 /build
 /public/build

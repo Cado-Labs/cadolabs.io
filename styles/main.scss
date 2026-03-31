@@ -198,10 +198,8 @@ nav {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    > a {
-      + > a {
-        margin-left: 46px;
-      }
+    > a + a {
+      margin-left: 46px;
     }
     li + li {
       margin-left: 46px;

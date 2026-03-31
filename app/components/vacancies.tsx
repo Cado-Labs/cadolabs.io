@@ -1,8 +1,7 @@
-import { Link } from 'remix';
+import { Link } from "react-router";
+import type { VacancyRecord } from "../../types/vacancy";
 
-export default function VacanciesList(data: { data: string; }) {
-    const vacancyList = JSON.parse(data.data);
-
+export default function VacanciesList({ data }: { data: VacancyRecord[] }) {
     return (
         <section className="cado-looking-for">
             <div className="wrapper">
@@ -18,7 +17,7 @@ export default function VacanciesList(data: { data: string; }) {
                     </div>
                 </div>
                 <ul>
-                    {vacancyList.map((vacancy, index) => (
+                    {data.map((vacancy, index: number) => (
                         <li key={index}>
                             <div className="inner">
                                 <Link

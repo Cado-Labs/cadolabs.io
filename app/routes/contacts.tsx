@@ -1,39 +1,48 @@
-import type {ActionFunction, MetaFunction} from "remix";
-import {Form, useFetcher, useTransition} from "remix";
+import type { MetaFunction } from "react-router";
+import { Form, useNavigation } from "react-router";
 import VacanciesList from "~/components/vacancies";
 import {useEffect, useRef} from "react";
+import { data } from "react-router";
+import { resolveAppEnv } from "~/utils/env.server";
+import { useVacancies } from "~/utils/root-data";
+import { sendFeedback } from "~/utils/feedback.server";
+import type { AppEnv } from "../../types/env";
 
 export const meta: MetaFunction = () => {
-  return {
-    title: "Cadolabs - contact",
-  }
+  return [{ title: "Cadolabs - contact" }];
 };
 
+type ActionArgs = {
+  request: Request;
+  context: {
+    cloudflare: {
+      env: AppEnv;
+    };
+  };
+};
 
-export const action: ActionFunction = async ({request}) => {
+export async function action({ request, context }: ActionArgs) {
   await new Promise((res) => setTimeout(res, 2000));
-  const body = await request.formData();
-  const baseUrl = new URL(request.url);
-  const response = await fetch(`${baseUrl.origin}/api/airtable/sendMessage`, {
-    method: 'POST',
-    body: body,
-  })
-      .then(response => {return response.json()})
-      .catch(e => {e.message});
-  return true;
+  const response = await sendFeedback(resolveAppEnv(context), await request.formData());
+
+  if (!response.ok) {
+    const errorDetail = await response.json() as unknown;
+
+    return data(errorDetail, { status: response.status });
+  }
+
+  return data({ ok: true });
 }
 
 export default function Contacts() {
-  let transition = useTransition();
-  let fetcher = useFetcher();
-  let formRef = useRef();
+  let navigation = useNavigation();
+  const vacancies = useVacancies();
+  let formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
-        if (transition.state === 'loading') {
-          formRef.current?.reset();
-        }
-        fetcher.load('/airtable/getTable');
-      }, [transition]
-  );
+    if (navigation.state === 'loading') {
+      formRef.current?.reset();
+    }
+  }, [navigation.state]);
   return (
       <div>
         <section className="contact">
@@ -54,12 +63,12 @@ export default function Contacts() {
                     <input type="email" placeholder="Email" name="email" pattern="^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" required />
                   </div>
                   <div className="input-outer">
-                    <textarea name="message" id="" cols="30" rows="7" placeholder="Message" required />
+                    <textarea name="message" id="" cols={30} rows={7} placeholder="Message" required />
                   </div>
                   <div className="input-outer">
                     <button type="submit" value="Send">Send</button>
                   </div>
-                  {transition.state === "submitting" &&
+                  {navigation.state === "submitting" &&
                   <div className="form-message">
                     <p>Your message has been sent</p>
                   </div>
@@ -69,7 +78,7 @@ export default function Contacts() {
             </div>
           </div>
         </section>
-        {fetcher.data ? <VacanciesList data={fetcher.data} /> : null}
+        {vacancies.length ? <VacanciesList data={vacancies} /> : null}
       </div>
   );
 }

@@ -1,43 +1,41 @@
 {
   "private": true,
+  "type": "module",
   "name": "remix-app-template",
   "description": "",
   "license": "",
   "scripts": {
-    "build": "npm run build:css && cross-env NODE_ENV=production remix build",
+    "build": "npm run build:css && cross-env NODE_ENV=production react-router build",
     "dev": "cross-env NODE_ENV=development run-p dev:*",
-    "postinstall": "remix setup cloudflare-pages",
-    "dev:remix": "remix watch",
-    "dev:wrangler": "wrangler pages dev ./public --watch ./build",
-    "start": "npm run dev:wrangler",
-    "build:css": "node-sass ./styles -o ./app/styles --output-style compressed",
-    "dev:css": "npm run build:css && node-sass -rw ./styles -o ./app/styles"
+    "dev:router": "react-router dev",
+    "start": "wrangler pages dev ./build/client",
+    "build:css": "sass ./styles:./app/styles --style=compressed --no-source-map",
+    "dev:css": "npm run build:css && sass --watch ./styles:./app/styles"
   },
   "dependencies": {
-    "@remix-run/cloudflare-pages": "^1.1.1",
-    "@remix-run/react": "^1.1.1",
-    "airtable": "^0.11.1",
-    "node-sass": "^7.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router": "^6.2.1",
-    "remix": "^1.1.1",
+    "@react-router/cloudflare": "^7",
+    "sass": "^1.86.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^7",
     "replace": "^1.2.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^3.2.0",
-    "@remix-run/dev": "^1.1.1",
-    "@types/react": "^17.0.24",
-    "@types/react-dom": "^17.0.9",
+    "@cloudflare/workers-types": "^4",
+    "@react-router/dev": "^7",
+    "@react-router/fs-routes": "^7",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
     "cross-env": "^7.0.3",
-    "esbuild": "0.13.14",
+    "esbuild": "^0.25.0",
     "npm-run-all": "^4.1.5",
-    "typescript": "^4.1.2",
-    "wrangler": "alpha"
+    "typescript": "^5.0.0",
+    "vite": "^5.4.14",
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.0.0"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=20"
   },
-  "sideEffects": false,
-  "main": "dist/worker.js"
+  "sideEffects": false
 }
