@@ -8,6 +8,7 @@
     "build": "npm run build:css && cross-env NODE_ENV=production react-router build",
     "dev": "cross-env NODE_ENV=development run-p dev:*",
     "dev:router": "react-router dev",
+    "deploy:dev": "wrangler pages deploy ./build/client --branch=stage",
     "start": "wrangler pages dev ./build/client",
     "build:css": "sass ./styles:./app/styles --style=compressed --no-source-map",
     "dev:css": "npm run build:css && sass --watch ./styles:./app/styles"
