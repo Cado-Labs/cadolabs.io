@@ -7,8 +7,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function CareerIndex() {
-    const vacancies = useVacancies();
-    return (
+  const vacancies = useVacancies();
+  return (
       <div>
         <section className="about-career">
           <div className="wrapper">
