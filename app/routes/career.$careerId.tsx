@@ -4,8 +4,8 @@ import { Link, useLoaderData } from "react-router";
 import { resolveAppEnv } from "~/utils/env.server";
 import { useVacancies } from "~/utils/root-data";
 import { getVacancies } from "~/utils/vacancies.server";
-import type { AppEnv } from "../../../types/env";
-import type { VacancyRecord } from "../../../types/vacancy";
+import type { AppEnv } from "../../types/env";
+import type { VacancyRecord } from "../../types/vacancy";
 
 type CareerLoaderData = {
   list: VacancyRecord[];
