@@ -2,27 +2,6 @@ import { renderToReadableStream } from "react-dom/server.browser";
 import { ServerRouter } from "react-router";
 import type { EntryContext } from "react-router";
 
-function prependDoctype(stream: ReadableStream) {
-  return new ReadableStream({
-    async start(controller) {
-      controller.enqueue(new TextEncoder().encode("<!DOCTYPE html>"));
-      const reader = stream.getReader();
-
-      while (true) {
-        const { done, value } = await reader.read();
-
-        if (done) {
-          break;
-        }
-
-        controller.enqueue(value);
-      }
-
-      controller.close();
-    },
-  });
-}
-
 export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
@@ -36,9 +15,11 @@ export default async function handleRequest(
     }
   );
 
+  await stream.allReady;
+
   responseHeaders.set("Content-Type", "text/html");
 
-  return new Response(prependDoctype(stream), {
+  return new Response(stream, {
     status: responseStatusCode,
     headers: responseHeaders
   });

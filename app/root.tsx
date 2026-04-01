@@ -157,6 +157,8 @@ function Document({
           <meta property="og:image:width" content="180" />
           <meta property="og:image:height" content="180" />
           <script defer src="/js/main.js"/>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKETZJNZB1"/>
+          <script dangerouslySetInnerHTML={{__html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XKETZJNZB1');`}}/>
           <Meta />
           <Links />
         </head>
