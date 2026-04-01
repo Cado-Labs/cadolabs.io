@@ -1,14 +1,32 @@
 import type { MetaFunction } from "react-router";
 import VacanciesList from "~/components/vacancies";
-import { Link } from "react-router";
-import { useVacancies } from "~/utils/root-data";
+import { Link, useLoaderData } from "react-router";
+import { resolveAppEnv } from "~/utils/env.server";
+import { getVacancies } from "~/utils/vacancies.server";
+import type { AppEnv } from "../../types/env";
+import type { VacancyRecord } from "../../types/vacancy";
+
+type LoaderArgs = {
+  context: {
+    cloudflare?: {
+      env?: AppEnv;
+    };
+  };
+};
+
 export const meta: MetaFunction = () => {
   return [{ title: "Cadolabs - careers" }];
 };
 
+export async function loader({ context }: LoaderArgs) {
+  return {
+    vacancies: await getVacancies(resolveAppEnv(context)),
+  };
+}
+
 export default function CareerIndex() {
-  const vacancies = useVacancies();
-  return (
+    const { vacancies } = useLoaderData<typeof loader>() as { vacancies: VacancyRecord[] };
+    return (
       <div>
         <section className="about-career">
           <div className="wrapper">

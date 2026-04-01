@@ -36,7 +36,10 @@ export default async function handleRequest(
     }
   );
 
+  await stream.allReady;
+
   responseHeaders.set("Content-Type", "text/html");
+  responseHeaders.set("X-CF-Email-Obfuscation", "off");
 
   return new Response(prependDoctype(stream), {
     status: responseStatusCode,
