@@ -27,6 +27,15 @@ export function resolveAppEnv(context?: MaybeCloudflareContext): AppEnv | null {
     KVDATA: env?.KVDATA,
   };
 
+  console.log("[DEBUG resolveAppEnv]", {
+    hasCloudflare: !!context?.cloudflare,
+    hasEnv: !!env,
+    envKeys: env ? Object.keys(env) : [],
+    hasGsheetId: !!resolved.GSHEET_ID,
+    hasClientEmail: !!resolved.GSHEET_CLIENT_EMAIL,
+    hasPrivateKey: !!resolved.GSHEET_PRIVATE_KEY,
+  });
+
   if (!resolved.GSHEET_ID || !resolved.GSHEET_CLIENT_EMAIL || !resolved.GSHEET_PRIVATE_KEY) {
     return null;
   }
